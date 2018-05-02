@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AppRegistry, TextInput } from 'react-native';
+import { TextInput, View } from 'react-native';
 
 export default class LoginView extends Component {
   constructor(props) {
@@ -35,6 +35,3 @@ export default class LoginView extends Component {
     );
   }
 }
-
-// skip this line if using Create React Native App
-AppRegistry.registerComponent('AwesomeProject', () => UselessTextInput);
