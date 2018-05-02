@@ -7,8 +7,8 @@ class RowData{
     this.name = name;
     this.create = create;
     this.sended = sended;
-this.firstname = firstname;
-this.icon = firstname[0]+name[0];
+    this.firstname = firstname;
+    this.icon = firstname[0]+name[0];
   }
 }
 
@@ -68,14 +68,7 @@ export default class OverviewListView extends Component {
 }
 
 _handlePress= () => {
-  this.state = {
-    dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}).cloneWithRows([
-      new RowData("Marcel","","")
-      
-    ])
-      
-  
-  };
+  this.props.navigation.navigate('SelectMode');
 }
  
 // skip this line if using Create React Native App

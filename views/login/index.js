@@ -31,6 +31,8 @@ export default class LoginView extends Component {
         if (response.status == 200) {
           tokenHelper.token = responseJson.access_token;
           this.props.navigation.navigate('List');
+        } else {
+          Alert.alert("Oo smth. went wrong, pls check your inputs");
         }
         
       } catch (error) {
