@@ -18,7 +18,8 @@ export default class SocialSecurity extends Component {
           "name": "Restaurant Wok n Roll",
           "betriebsnummer": "99999998",
         }
-      ]
+      ],
+      token: `Bearer ${tokenHelper.token}`
     }
 
     this._register = function () {
@@ -31,10 +32,11 @@ export default class SocialSecurity extends Component {
           method: 'POST',
           headers: {
             Accept: 'application/json',
-            'Authorization': `Bearer ${tokenHelper.token}`,
+            'Authorization': token
           },
           body: `organization=${config.orgaId}`
         });
+        Alert.alert(token);
         let responseJson = await response.json();
 
         if (response.status == 200) {
