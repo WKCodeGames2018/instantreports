@@ -60,12 +60,12 @@ export default class LoginView extends Component {
           color="#841584"
           accessibilityLabel="Learn more about this purple button"
         />
-        <text>
+        <Text>
          {this.state.responseCode}
-        </text>
-        <text>
+        </Text>
+        <Text>
           {this.state.response}
-        </text>
+        </Text>
     </View>      
     );
   }
