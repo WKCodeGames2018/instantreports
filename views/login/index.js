@@ -18,6 +18,7 @@ export default class LoginView extends Component {
         let response = await fetch(this.state.baseUrl, {
           method: 'POST',
           headers: {
+            Accept: 'application/json',
             'Content-Type': 'application/x-www-form-urlencoded',
           },
           body: JSON.stringify({
