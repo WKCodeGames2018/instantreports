@@ -22,10 +22,10 @@ export default class LoginView extends Component {
 
       xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
-      xhr.addEventListener("progress", updateProgress);
-      xhr.addEventListener("load", transferComplete);
-      xhr.addEventListener("error", transferFailed);
-      xhr.addEventListener("abort", transferCanceled);
+      xhr.addEventListener("progress", function() { Alert.alert("progress")});
+      xhr.addEventListener("load", function() { Alert.alert("load")});
+      xhr.addEventListener("error", function() { Alert.alert("error")});
+      xhr.addEventListener("abort", function() { Alert.alert("abort")});
 
       xhr.onreadystatechange = function() {//Call a function when the state changes.
         
