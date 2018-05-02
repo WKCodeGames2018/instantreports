@@ -21,7 +21,22 @@ export default class SocialSecurity extends Component {
 
     this._register = async function () {
       try {
-        let response = await fetch(`${this.state.registerUrl}?organization=${config.orgaId}`, {
+        const req = new Request(`${this.state.baseUrl}?organization=${config.orgaId}`);
+
+        req.method = 'POST';
+        req.headers = {
+          Accept: 'application/json',
+          'Authorization': this.state.token
+        }
+        req.body = JSON.stringify({
+          vorname: this.state.firstName,
+          nachname: this.state.surName,
+          svnummer: this.state.socialSecurityNo,
+          betriebstaettenummer: this.state.selectedLocation,
+          eintrittsdatum: this.state.entranceDate
+        })
+
+        /* let response = await fetch(`${this.state.registerUrl}?organization=${config.orgaId}`, {
           method: 'POST',
           headers: {
             Accept: 'application/json',
@@ -34,7 +49,8 @@ export default class SocialSecurity extends Component {
             betriebstaettenummer: this.state.selectedLocation,
             eintrittsdatum: this.state.entranceDate
           })
-        });
+        }); */
+        let response = await fetch(req);
         let responseJson = await response.json();
 
         if (response.status == 200) {
