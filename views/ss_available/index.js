@@ -42,7 +42,7 @@ export default class SocialSecurity extends Component {
           selectedValue={this.state.selectedLocation}
           style={{ height: 50, width: 100 }}
           onValueChange={(item, itemIndex) => this.setState({selectedLocation: item})}>
-          {locations.map((item, key) => {
+          {this.state.locations.map((item, key) => {
             return (
               <Picker.Item label={item.name} value={item.betriebsnummer} />
             );
