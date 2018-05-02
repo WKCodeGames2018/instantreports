@@ -46,6 +46,8 @@ export default class SocialSecurity extends Component {
         Alert.alert("Could not fetch locations");
       }
     }
+
+    this._getLocations();
   }
 
   render() {
