@@ -9,7 +9,7 @@ export default class LoginView extends Component {
       user: 'ben.anderson',
       password: 'Password',
       baseUrl: 'https://ocde-pg.wktaa.de/sdn/oauth/token?response_type=code&grant_type=password',
-      responseCode: 000,
+      responseCode: 0,
       response: 'empty' // clientnumber=addisonadmin&username=admin&password=admin
     };
 
