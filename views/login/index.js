@@ -28,7 +28,7 @@ export default class LoginView extends Component {
         
         Alert.alert(response)
       } catch(e) {
-        Alert.alert(e)
+        Alert.alert("ERROR")
       }
       
       // Alert.alert(`${this.state.orga} ${this.state.user} ${this.state.password}`)
