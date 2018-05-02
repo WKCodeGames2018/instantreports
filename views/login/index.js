@@ -7,10 +7,31 @@ export default class LoginView extends Component {
     this.state = { 
       orga: 'Organame', // clientnumber
       user: 'Username',
-      password: 'Password'
+      password: 'Password',
+      baseUrl: 'https://pg.dev.two-clicks.de/sdn/oauth/token?response_type=code&grant_type=password' // clientnumber=addisonadmin&username=admin&password=admin
     };
-    this._onPress = function() {
-      Alert.alert(`${this.state.orga} ${this.state.user} ${this.state.password}`)
+
+    this._onPress = async function() {
+      try {
+        let response = await fetch(this.state.baseUrl, {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body: JSON.stringify({
+            user: this.state.user,
+            password: this.state.password,
+            orga: this.state.orga
+          }),
+        });
+        
+        Alert.alert(response)
+      } catch(e) {
+        Alert.alert(e)
+      }
+      
+      // Alert.alert(`${this.state.orga} ${this.state.user} ${this.state.password}`)
     }
   }
 
