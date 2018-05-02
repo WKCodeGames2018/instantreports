@@ -27,7 +27,7 @@ export default class LoginView extends Component {
           value={this.state.password}
         />
         <Button
-          onPress={e => this._onPress(e)}
+          onPress={this._onPress.bind(this)}
           title="Log In!"
           color="#841584"
           accessibilityLabel="Learn more about this purple button"
@@ -36,7 +36,7 @@ export default class LoginView extends Component {
     );
   }
 
-  _onPress(e) {
+  _onPress() {
     Alert(`${this.state.orga} ${this.state.user} ${this.state.password}`)
   }
 }
