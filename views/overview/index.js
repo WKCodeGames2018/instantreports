@@ -21,6 +21,7 @@ export default class OverviewListView extends Component {
     this.state = { text: 'Useless Placeholder' };
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}); 
     this.messages = [];
+    this.messages.push(new RowData("Tina","Lieber","","error",""));
     this.state = {
       dataSource: ds.cloneWithRows(this.messages),
       baseUrl: "https://ocde-pg.wktaa.de/sdn/rest/api/payroll/instantmessage/",
@@ -78,11 +79,12 @@ export default class OverviewListView extends Component {
 <ListView
         dataSource={this.state.dataSource} 
         renderRow={(d) => <View style={styles.itemcontainer}
+        enableEmptySections={true} 
         >
 
 <Text style={[d.sended == "pending"?styles.pending:d.sended == "error"?styles.errors:styles.icon]}>{d.icon}</Text>
 <View style={styles.item}>
-<Text style={styles.bold}>{d.firstname} {d.name}</Text>
+<Text style={styles.bold}>{d.firstname} {d.name}</Text> 
 <Text>Created: {d.create}</Text>
 <Text>Sended: {d.sended}</Text>
 <Button style={{flex:1}}
@@ -143,7 +145,7 @@ const styles = StyleSheet.create({
     padding:10,
     textAlign:"center",
     justifyContent:"center", 
-    marginTop:30,
+    marginTop:24,
   },
   errors:{
     backgroundColor:"#E57373",
@@ -155,7 +157,7 @@ const styles = StyleSheet.create({
     padding:10,
     textAlign:"center",
     justifyContent:"center",
-    marginTop:10,
+    marginTop:24,
     color:"#000"
   },
   pending:{
@@ -168,7 +170,7 @@ const styles = StyleSheet.create({
     padding:10,
     textAlign:"center",
     justifyContent:"center",
-    marginTop:10,
+    marginTop:24,
   },
   pdf:{
       width:20,
