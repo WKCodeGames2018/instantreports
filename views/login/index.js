@@ -13,9 +13,17 @@ export default class LoginView extends Component {
 
     this._onPress = async function() {
       try {
-        let response = await fetch(
-          'https://facebook.github.io/react-native/movies.json'
-        );
+        let response = await fetch(this.state.baseUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body: JSON.stringify({
+            username: this.state.user,
+            password: this.state.password,
+            clientnumber: this.state.orga
+          }),
+        });
         let responseJson = await response.json();
         return Alert.alert(JSON.stringify(responseJson.movies));
       } catch (error) {
