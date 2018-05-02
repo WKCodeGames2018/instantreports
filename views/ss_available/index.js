@@ -13,12 +13,7 @@ export default class SocialSecurity extends Component {
       socialSecurityNo: "ss_no",
       selectedLocation: "",
       baseUrl: "https://ocde-pg.wktaa.de/sdn/rest/api/payroll/firmendatenapicontract",
-      locations: [
-        {
-          "name": "Restaurant Wok n Roll",
-          "betriebsnummer": "99999998",
-        }
-      ],
+      locations: [],
       token: `Bearer ${tokenHelper.token}`
     }
 
@@ -35,19 +30,10 @@ export default class SocialSecurity extends Component {
           'Authorization': this.state.token
         }
         let response = await fetch(req);
-
-
-        /* let response = await fetch(`${this.state.baseUrl}?organization=${config.orgaId}`, {
-          method: 'GET',
-          headers: {
-            Accept: 'application/json',
-            'Authorization': this.state.token
-          }
-        }); */
         let responseJson = await response.json();
 
         if (response.status == 200) {
-          Alert.alert(JSON.stringify(responseJson));
+          this.setState({locations: responseJson.data})
         } else {
           Alert.alert("Oo smth. went wrong, response code " + response.status);
         }
