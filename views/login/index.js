@@ -9,12 +9,7 @@ export default class LoginView extends Component {
 
   render() {
     return (
-      <View
-      style={{
-        flexDirection: 'row',
-        height: 100,
-        padding: 20,
-      }}>
+      <View>
       <TextInput
         style={{height: 40, borderColor: 'gray', borderWidth: 1}}
         onChangeText={(text) => this.setState({text})}
