@@ -10,7 +10,7 @@ class RowData{
     this.firstname = firstname;
     this.icon = firstname[0]+name[0];
 
-    this._handlePress= () => {
+    this._handlePress = function() {
       this.props.navigation.navigate('SelectMode');
     }
   }
