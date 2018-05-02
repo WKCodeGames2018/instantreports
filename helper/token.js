@@ -1,5 +1,8 @@
+import { Alert } from 'react-native';
+
 class TokenHelper {
   constructor() {
+    Alert.alert("Create Token")
     this._token = '';
   }
 
