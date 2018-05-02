@@ -9,6 +9,10 @@ class RowData{
     this.sended = sended;
     this.firstname = firstname;
     this.icon = firstname[0]+name[0];
+
+    this._handlePress= () => {
+      this.props.navigation.navigate('SelectMode');
+    }
   }
 }
 
@@ -37,7 +41,7 @@ export default class OverviewListView extends Component {
         
         <View> 
       <Button style={{flex:1}}
-  onPress={_handlePress}  
+  onPress={this._handlePress.bind(this)}  
   title="New immediate notice"
   color="#841584"
   accessibilityLabel="Learn more about this purple button"
@@ -67,10 +71,6 @@ export default class OverviewListView extends Component {
   } 
 }
 
-_handlePress= () => {
-  this.props.navigation.navigate('SelectMode');
-}
- 
 // skip this line if using Create React Native App
 AppRegistry.registerComponent('codegames', () => OverviewListView);
 
