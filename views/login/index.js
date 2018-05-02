@@ -5,10 +5,10 @@ export default class LoginView extends Component {
   constructor(props) {
     super(props);
     this.state = { 
-      orga: 'Organame', // clientnumber
-      user: 'Username',
+      orga: 'orga', // clientnumber
+      user: 'ben.anderson',
       password: 'Password',
-      baseUrl: 'https://pg.dev.two-clicks.de/sdn/oauth/token?response_type=code&grant_type=password' // clientnumber=addisonadmin&username=admin&password=admin
+      baseUrl: 'https://ocde-pg.wktaa.de/sdn/oauth/token?response_type=code&grant_type=password' // clientnumber=addisonadmin&username=admin&password=admin
     };
 
     this._onPress = async function() {
