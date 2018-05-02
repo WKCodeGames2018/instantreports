@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AppRegistry, TextInput, View, Button } from 'react-native';
+import { AppRegistry, TextInput, View, Button, Alert } from 'react-native';
 
 export default class LoginView extends Component {
   constructor(props) {
