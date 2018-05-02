@@ -27,15 +27,13 @@ export default class SocialSecurity extends Component {
     }
 
     this._getLocations = async function() {
-      Alert.alert(this.state.token);
       try {
-        let response = await fetch(this.state.baseUrl, {
+        let response = await fetch(`${this.state.baseUrl}?organization=${config.orgaId}`, {
           method: 'GET',
           headers: {
             Accept: 'application/json',
             'Authorization': this.state.token
-          },
-          body: `organization=${config.orgaId}`
+          }
         });
         let responseJson = await response.json();
 
