@@ -5,17 +5,17 @@ import { TabNavigator, TabBarBottom } from 'react-navigation';
 
 import Colors from '../constants/Colors';
 
-import HomeScreen from '../screens/HomeScreen';
-import LinksScreen from '../screens/LinksScreen';
+import LoginView from './views/login';
+import OverviewListView from './views/overview';
 import SettingsScreen from '../screens/SettingsScreen';
 
 export default TabNavigator(
   {
     Home: {
-      screen: HomeScreen,
+      screen: LoginView,
     },
     Links: {
-      screen: LinksScreen,
+      screen: OverviewListView,
     },
     Settings: {
       screen: SettingsScreen,
