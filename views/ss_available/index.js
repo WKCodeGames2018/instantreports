@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { AppRegistry, View, Button, TextInput, Picker, Input, Alert } from 'react-native';
 import config  from '../../helper/config';
-import tokenHelper from '../../helper/token'
+import tokenHelper from '../../helper/token';
 
 export default class SocialSecurity extends Component {
   constructor(props) {
@@ -27,6 +27,7 @@ export default class SocialSecurity extends Component {
     }
 
     this._getLocations = async function() {
+      Alert.alert(this.state.token);
       try {
         let response = await fetch(this.state.baseUrl, {
           method: 'POST',
@@ -73,7 +74,7 @@ export default class SocialSecurity extends Component {
           onValueChange={(item, itemIndex) => this.setState({selectedLocation: item})}>
           {this.state.locations.map((item, key) => {
             return (
-              <Picker.Item label={item.name} value={item.betriebsnummer} />
+              <Picker.Item label={item.name} key={key} value={item.betriebsnummer} />
             );
           })}
         </Picker>
