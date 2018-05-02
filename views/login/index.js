@@ -29,7 +29,7 @@ export default class LoginView extends Component {
 
         if (responseJson.status == 200) {
           tokenHelper.token = responseJson.access_token;
-
+          this.props.navigation.navigate('List');
         }
         
       } catch (error) {
