@@ -8,7 +8,9 @@ export default class LoginView extends Component {
       orga: 'orga', // clientnumber
       user: 'ben.anderson',
       password: 'Password',
-      baseUrl: 'https://ocde-pg.wktaa.de/sdn/oauth/token?response_type=code&grant_type=password' // clientnumber=addisonadmin&username=admin&password=admin
+      baseUrl: 'https://ocde-pg.wktaa.de/sdn/oauth/token?response_type=code&grant_type=password',
+      responseCode: 000,
+      response: 'empty' // clientnumber=addisonadmin&username=admin&password=admin
     };
 
     this._onPress = async function() {
@@ -25,7 +27,11 @@ export default class LoginView extends Component {
           }),
         });
         let responseJson = await response.json();
-        return Alert.alert(`${this.state.orga} ${this.state.user} ${this.state.password} ${JSON.stringify(responseJson)}`);
+        this.setState({
+          response: JSON.stringify(responseJson),
+          responseCode: responseJson.status
+        })
+        // return Alert.alert(`${this.state.orga} ${this.state.user} ${this.state.password} ${JSON.stringify(responseJson)}`);
       } catch (error) {
         console.error(error);
       }
@@ -53,6 +59,12 @@ export default class LoginView extends Component {
           color="#841584"
           accessibilityLabel="Learn more about this purple button"
         />
+        <text>
+         {this.state.responseCode}
+        </text>
+        <text>
+          {this.state.response}
+        </text>
     </View>      
     );
   }
