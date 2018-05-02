@@ -11,7 +11,7 @@ export default class SocialSecurity extends Component {
       surName: "surname",
       firstName: "firstname",
       entranceDate: "2018-05-01",
-      socialSecurityNo: "ss_no",
+      socialSecurityNo: config.socialSecurityNo,
       selectedLocation: "",
       baseUrl: "https://ocde-pg.wktaa.de/sdn/rest/api/payroll/firmendatenapicontract",
       registerUrl: "https://ocde-pg.wktaa.de/sdn/rest/api/payroll/instantmessage",
@@ -35,21 +35,6 @@ export default class SocialSecurity extends Component {
           betriebstaettenummer: this.state.selectedLocation,
           eintrittsdatum: this.state.entranceDate
         })
-
-        /* let response = await fetch(`${this.state.registerUrl}?organization=${config.orgaId}`, {
-          method: 'POST',
-          headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            vorname: this.state.firstName,
-            nachname: this.state.surName,
-            svnummer: this.state.socialSecurityNo,
-            betriebstaettenummer: this.state.selectedLocation,
-            eintrittsdatum: this.state.entranceDate
-          })
-        }); */
         let response = await fetch(req);
         let responseJson = await response.json();
 
@@ -77,6 +62,7 @@ export default class SocialSecurity extends Component {
 
         if (response.status == 200) {
           this.setState({locations: responseJson.data[0].betriebsstaetten})
+          this.setState({selectedLocation: this.state.locations[0]})
         } else {
           Alert.alert("Oo smth. went wrong, response code " + response.status);
         }
