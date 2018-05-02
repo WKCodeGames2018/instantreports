@@ -27,7 +27,7 @@ export default class LoginView extends Component {
         });
         let responseJson = await response.json();
 
-        if (responseJson.status == 200) {
+        if (response.status == 200) {
           tokenHelper.token = responseJson.access_token;
           this.props.navigation.navigate('List');
         }

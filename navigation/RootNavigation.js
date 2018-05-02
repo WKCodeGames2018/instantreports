@@ -28,7 +28,7 @@ const RootStackNavigator = StackNavigator(
     Login: {
       screen: LoginView,
     },
-    Details: {
+    List: {
       screen: OverviewListView,
     },
   },
