@@ -5,8 +5,8 @@ import { TabNavigator, TabBarBottom } from 'react-navigation';
 
 import Colors from '../constants/Colors';
 
-import LoginView from './views/login';
-import OverviewListView from './views/overview';
+import LoginView from '../views/login';
+import OverviewListView from '../views/overview';
 import SettingsScreen from '../screens/SettingsScreen';
 
 export default TabNavigator(
