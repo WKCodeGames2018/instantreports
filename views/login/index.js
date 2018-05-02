@@ -11,26 +11,20 @@ export default class LoginView extends Component {
       baseUrl: 'https://pg.dev.two-clicks.de/sdn/oauth/token?response_type=code&grant_type=password' // clientnumber=addisonadmin&username=admin&password=admin
     };
 
-    this._onPress = async function() {
-      try {
-        let response = await fetch(this.state.baseUrl, {
-          method: 'POST',
-          headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/x-www-form-urlencoded',
-          },
-          body: JSON.stringify({
-            username: this.state.user,
-            password: this.state.password,
-            clientnumber: this.state.orga
-          }),
-        });
-        
-        Alert.alert(response)
-      } catch(e) {
-        Alert.alert("ERROR")
+    this._onPress = function() {
+      const xhr = new XMLHttpRequest();
+      xhr.open("POST", this.state.baseUrl, true);
+
+      xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+      xhr.onreadystatechange = function() {//Call a function when the state changes.
+        Alert.alert(xhr.readyState)
+        if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
+            // Request finished. Do processing here.
+        }
       }
-      
+
+      xhr.send(`clientnumber=${this.state.orga}&username=${this.state.user}&password=${this.state.password}`);
       // Alert.alert(`${this.state.orga} ${this.state.user} ${this.state.password}`)
     }
   }
