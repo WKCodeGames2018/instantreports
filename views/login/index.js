@@ -19,7 +19,7 @@ export default class LoginView extends Component {
 
       xhr.onreadystatechange = function() {//Call a function when the state changes.
         
-        if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
+        if(xhr.readyState == XMLHttpRequest.DONE && xhr.status) {
           Alert.alert(xhr.status)
         }
       }
