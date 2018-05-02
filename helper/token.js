@@ -11,6 +11,7 @@ class TokenHelper {
   }
 
   set token(tokenString) {
+    ALert.alert("token: " + tokenString)
     this._token = tokenString;
   }
 }
