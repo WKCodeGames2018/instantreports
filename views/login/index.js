@@ -17,7 +17,7 @@ export default class LoginView extends Component {
           'https://facebook.github.io/react-native/movies.json'
         );
         let responseJson = await response.json();
-        return Alert.alert(responseJson.movies);
+        return Alert.alert(JSON.stringify(responseJson.movies));
       } catch (error) {
         console.error(error);
       }
