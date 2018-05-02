@@ -11,8 +11,17 @@ export default class LoginView extends Component {
       baseUrl: 'https://pg.dev.two-clicks.de/sdn/oauth/token?response_type=code&grant_type=password' // clientnumber=addisonadmin&username=admin&password=admin
     };
 
-    this._onPress = function() {
-      const xhr = new XMLHttpRequest();
+    this._onPress = async function() {
+      try {
+        let response = await fetch(
+          'https://facebook.github.io/react-native/movies.json'
+        );
+        let responseJson = await response.json();
+        return Alert.alert(responseJson.movies);
+      } catch (error) {
+        console.error(error);
+      }
+      /* const xhr = new XMLHttpRequest();
       const data = new FormData();
       data.append('username', this.state.user);
       data.append('password', this.state.password);
@@ -46,7 +55,7 @@ export default class LoginView extends Component {
       xhr.send({ form: data }); 
       // xhr.send(`clientnumber=${this.state.orga}&username=${this.state.user}&password=${this.state.password}`);
       // Alert.alert(`${this.state.orga} ${this.state.user} ${this.state.password}`)
-    }
+    } */
   }
 
   render() {
