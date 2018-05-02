@@ -33,7 +33,8 @@ export default class SocialSecurity extends Component {
         let responseJson = await response.json();
 
         if (response.status == 200) {
-          this.setState({locations: responseJson.data})
+          Alert.alert(JSON.stringify(responseJson.data))
+          // this.setState({locations: responseJson.data})
         } else {
           Alert.alert("Oo smth. went wrong, response code " + response.status);
         }
@@ -60,7 +61,7 @@ export default class SocialSecurity extends Component {
           onChangeText={(socialSecurityNo) => this.setState({socialSecurityNo})}
           value={this.state.socialSecurityNo}
         />
-        {this.state.locations.length && 
+        {this.state.locations.length > 0 && 
           <Picker
           selectedValue={this.state.selectedLocation}
           style={{ height: 50, width: 100 }}
