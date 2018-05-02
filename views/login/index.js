@@ -22,6 +22,11 @@ export default class LoginView extends Component {
 
       xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
+      xhr.addEventListener("progress", updateProgress);
+      xhr.addEventListener("load", transferComplete);
+      xhr.addEventListener("error", transferFailed);
+      xhr.addEventListener("abort", transferCanceled);
+
       xhr.onreadystatechange = function() {//Call a function when the state changes.
         
         if(xhr.readyState == XMLHttpRequest.DONE && xhr.status) {
@@ -34,7 +39,7 @@ export default class LoginView extends Component {
           if (xhr.status === "401") {
             return Alert.alert("401")
           }
-          return Alert.alert(xhr.status)
+          return Alert.alert(JSON.parse(xhr.status))
         }
       }.bind(this)
 
