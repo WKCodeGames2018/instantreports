@@ -10,16 +10,42 @@ export default class SocialSecurity extends Component {
     this.state = {
       surName: "surname",
       firstName: "firstname",
-      entranceDate: 1525273779950,
+      entranceDate: "2018-05-01",
       socialSecurityNo: "ss_no",
       selectedLocation: "",
       baseUrl: "https://ocde-pg.wktaa.de/sdn/rest/api/payroll/firmendatenapicontract",
+      registerUrl: "https://ocde-pg.wktaa.de/sdn/rest/api/payroll/instantmessage",
       locations: [],
       token: `Bearer ${tokenHelper.token}`
     }
 
     this._register = function () {
-      Alert.alert("Yolo")
+      try {
+        let response = await fetch(`${this.state.registerUrl}?organization=${config.orgaId}`, {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body: {
+            "vorname": this.state.firstName,
+            "nachname": this.state.surName,
+            "svnummer": this.state.socialSecurityNo,
+            "betriebstaettenummer": this.state.selectedLocation,
+            "eintrittsdatum": this.state.entranceDate
+          }
+        });
+        let responseJson = await response.json();
+
+        if (response.status == 200) {
+          this.props.navigation.navigate('List');
+        } else {
+          Alert.alert("Oo smth. went wrong, pls check your inputs");
+        }
+        
+      } catch (error) {
+        Alert.alert("Could not fetch locations");
+      }
     }
 
     this._getLocations = async function() {
@@ -75,7 +101,7 @@ export default class SocialSecurity extends Component {
           : null} 
           <DatePicker
             style={{width: 200}}
-            date="2018-05-01"
+            date={this.state.entranceDate}
             mode="date"
             placeholder="select date"
             format="YYYY-MM-DD"
@@ -95,7 +121,7 @@ export default class SocialSecurity extends Component {
               }
               // ... You can check the source to find the other keys.
             }}
-            onDateChange={(date) => {this.setState({date: date})}}
+            onDateChange={(date) => {this.setState({entranceDate: date})}}
           />
         <Button
           onPress={this._register.bind(this)}
