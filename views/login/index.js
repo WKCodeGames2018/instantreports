@@ -30,13 +30,13 @@ export default class LoginView extends Component {
         });
         let responseJson = await response.json();
         this.setState({
-          response: JSON.stringify(responseJson)
+          response: responseJson ? JSON.stringify(responseJson) : "yolo"
         })
         this.setState({
-          responseCode: responseJson.status
+          responseCode: responseJson.status ? responseJson.status : "jjj"
         })
         this.setState({
-          reqBody: JSON.stringify(responseJson.bodyUsed)
+          reqBody: responseJson.bodyUsed ? JSON.stringify(responseJson.bodyUsed) : "noooo"
         })
         // return Alert.alert(`${this.state.orga} ${this.state.user} ${this.state.password} ${JSON.stringify(responseJson)}`);
       } catch (error) {
