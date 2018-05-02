@@ -22,7 +22,7 @@ export default class LoginView extends Component {
           body: JSON.stringify({
             user: this.state.user,
             password: this.state.password,
-            orga: this.state.orga
+            clientnumber: this.state.orga
           }),
         });
         
