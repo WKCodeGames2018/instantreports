@@ -82,7 +82,7 @@ export default class SocialSecurity extends Component {
           value={this.state.surName}
         />
         <TextInput
-          onChangeText={(firstName) => this.setState({orfirstNamegfirstNamea})}
+          onChangeText={(firstName) => this.setState({firstName})}
           value={this.state.firstName}
         />
         <TextInput
