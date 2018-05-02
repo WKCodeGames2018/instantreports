@@ -20,7 +20,7 @@ export default class OverviewListView extends Component {
     this.state = {
       dataSource: ds.cloneWithRows([
         new RowData("Marcel","Weissgerber","2018-05-02",""),
-        new RowData("Edwin","Draser","","2018-05-02","error"),
+        new RowData("Edwin","Draser","2018-05-02","error"),
         new RowData("Julian","Donauer","2018-05-02","2018-05-02 11:00:11"),
         new RowData("Sebastian","Abele","2018-05-02","pending")
          
@@ -37,8 +37,8 @@ export default class OverviewListView extends Component {
         
         <View> 
       <Button style={{flex:1}}
-  onPress={_handlePress}
-  title="Add"
+  onPress={_handlePress}  
+  title="New immediate notice"
   color="#841584"
   accessibilityLabel="Learn more about this purple button"
 /></View>
@@ -47,9 +47,9 @@ export default class OverviewListView extends Component {
         dataSource={this.state.dataSource} 
         renderRow={(d) => <View style={styles.itemcontainer}>
 
-<Text style={styles.icon}>{d.icon}</Text>
+<Text style={[d.sended == "pending"?styles.pending:d.sended == "error"?styles.errors:styles.icon]}>{d.icon}</Text>
 <View style={styles.item}>
-<Text style={styles.bold}>{d.name}</Text>
+<Text style={styles.bold}>{d.firstname} {d.name}</Text>
 <Text>Created: {d.create}</Text>
 <Text>Sended: {d.sended}</Text>
 
@@ -57,7 +57,7 @@ export default class OverviewListView extends Component {
 
 
         </View>}
-
+ 
 
       >
 </ListView>
@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold'
   },
   icon:{
-    backgroundColor:"#99D59D",
+    backgroundColor:"#81C784",
     borderRadius:100,
     borderWidth: 1,
     borderColor: '#ddd',
@@ -112,8 +112,8 @@ const styles = StyleSheet.create({
     justifyContent:"center",
     marginTop:10,
   },
-  error:{
-    backgroundColor:"#FF1414",
+  errors:{
+    backgroundColor:"#E57373",
     borderRadius:100,
     borderWidth: 1,
     borderColor: '#ddd',
@@ -123,7 +123,20 @@ const styles = StyleSheet.create({
     textAlign:"center",
     justifyContent:"center",
     marginTop:10,
-  }
+    color:"#000"
+  },
+  pending:{
+    backgroundColor:"#FFD54F",
+    borderRadius:100,
+    borderWidth: 1,
+    borderColor: '#ddd',
+    width:50, 
+    height:50,
+    padding:10,
+    textAlign:"center",
+    justifyContent:"center",
+    marginTop:10,
+  },
 
 
 });
