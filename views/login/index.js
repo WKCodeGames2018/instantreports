@@ -4,10 +4,6 @@ import { StackNavigator } from 'react-navigation';
 import OverviewListView from '../overview'
 import tokenHelper from '../../helper/token'
 
-const App = StackNavigator({
-  Login: { screen: LoginView },
-  List: { screen: OverviewListView },
-});
 
 export default class LoginView extends Component {
   constructor(props) {
@@ -36,7 +32,7 @@ export default class LoginView extends Component {
 
         if (responseJson.status == 200) {
           tokenHelper.token = responseJson.access_token;
-          this.props.navigation.navigate('List');
+
         }
         
       } catch (error) {

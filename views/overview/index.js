@@ -1,5 +1,16 @@
 import React, { Component } from 'react';
-import { AppRegistry, TextInput, View, ListView, Text,StyleSheet,Button} from 'react-native';
+import { AppRegistry, TextInput, View, ListView, Text,StyleSheet,Button,Icon} from 'react-native';
+
+class RowData{
+  
+  constructor(firstname,name,create,sended){
+    this.name = name;
+    this.create = create;
+    this.sended = sended;
+this.firstname = firstname;
+this.icon = firstname[0]+name[0];
+  }
+}
 
 export default class OverviewListView extends Component {
   constructor(props) {
@@ -7,32 +18,64 @@ export default class OverviewListView extends Component {
     this.state = { text: 'Useless Placeholder' };
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
-      dataSource: ds.cloneWithRows(['row 1', 'row 2']),
+      dataSource: ds.cloneWithRows([
+        new RowData("Marcel","Weissgerber","2018-05-02",""),
+        new RowData("Edwin","Draser","","2018-05-02","error"),
+        new RowData("Julian","Donauer","2018-05-02","2018-05-02 11:00:11"),
+        new RowData("Sebastian","Abele","2018-05-02","pending")
+         
+        
+      ])
+        
+    
     };
   }
 
   render() {
     return (
-      <View style={{width: 50, height: 50, backgroundColor: 'powderblue'}}>
+      <View style={{flex: 0.8}}>
         
-      <ListView
-        dataSource={this.state.dataSource}
-        renderRow={(rowData) => <Text>{rowData}</Text>}
-      
-      >
-      <Button
+        <View> 
+      <Button style={{flex:1}}
   onPress={_handlePress}
   title="Add"
   color="#841584"
   accessibilityLabel="Learn more about this purple button"
-/></ListView>
+/></View>
+
+<ListView
+        dataSource={this.state.dataSource} 
+        renderRow={(d) => <View style={styles.itemcontainer}>
+
+<Text style={styles.icon}>{d.icon}</Text>
+<View style={styles.item}>
+<Text style={styles.bold}>{d.name}</Text>
+<Text>Created: {d.create}</Text>
+<Text>Sended: {d.sended}</Text>
+
+</View>
+
+
+        </View>}
+
+
+      >
+</ListView>
+
     </View>
     );
   } 
 }
 
 _handlePress= () => {
-
+  this.state = {
+    dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}).cloneWithRows([
+      new RowData("Marcel","","")
+      
+    ])
+      
+  
+  };
 }
  
 // skip this line if using Create React Native App
@@ -41,6 +84,46 @@ AppRegistry.registerComponent('codegames', () => OverviewListView);
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#ff00ff',
+    backgroundColor: '#fff',
   },
+  itemcontainer:{
+    flex:1,
+    flexDirection:"row",
+    height:70,
+    margin:1,
+    backgroundColor:"#fff",
+  },
+  item:{
+    flex:1,
+    padding:4,
+  },
+  bold:{ 
+    fontWeight: 'bold'
+  },
+  icon:{
+    backgroundColor:"#99D59D",
+    borderRadius:100,
+    borderWidth: 1,
+    borderColor: '#ddd',
+    width:50, 
+    height:50,
+    padding:10,
+    textAlign:"center",
+    justifyContent:"center",
+    marginTop:10,
+  },
+  error:{
+    backgroundColor:"#FF1414",
+    borderRadius:100,
+    borderWidth: 1,
+    borderColor: '#ddd',
+    width:50, 
+    height:50,
+    padding:10,
+    textAlign:"center",
+    justifyContent:"center",
+    marginTop:10,
+  }
+
+
 });
