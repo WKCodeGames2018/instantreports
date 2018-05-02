@@ -60,7 +60,7 @@ export default class SocialSecurity extends Component {
           onChangeText={(socialSecurityNo) => this.setState({socialSecurityNo})}
           value={this.state.socialSecurityNo}
         />
-        {this.state.locations.length > 0 ? 
+        {this.state.locations && this.state.locations.length > 0 ? 
           <Picker
             selectedValue={this.state.selectedLocation}
             style={{ height: 50, width: 100 }}
