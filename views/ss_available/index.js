@@ -33,8 +33,7 @@ export default class SocialSecurity extends Component {
         let responseJson = await response.json();
 
         if (response.status == 200) {
-          Alert.alert(JSON.stringify(responseJson.data))
-          // this.setState({locations: responseJson.data})
+          this.setState({locations: responseJson.data.betriebsstaetten})
         } else {
           Alert.alert("Oo smth. went wrong, response code " + response.status);
         }
