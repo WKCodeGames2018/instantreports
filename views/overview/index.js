@@ -9,10 +9,6 @@ class RowData{
     this.sended = sended;
     this.firstname = firstname;
     this.icon = firstname[0]+name[0];
-
-    this._handlePress = function() {
-      this.props.navigation.navigate('SelectMode');
-    }
   }
 }
 
@@ -41,7 +37,7 @@ export default class OverviewListView extends Component {
         
         <View> 
       <Button style={{flex:1}}
-  onPress={this._handlePress.bind(this)}  
+  onPress={this.props.navigation.navigate('SelectMode')}  
   title="New immediate notice"
   color="#841584"
   accessibilityLabel="Learn more about this purple button"
