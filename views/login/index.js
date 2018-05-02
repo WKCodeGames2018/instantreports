@@ -4,26 +4,35 @@ import { AppRegistry, TextInput, View } from 'react-native';
 export default class LoginView extends Component {
   constructor(props) {
     super(props);
-    this.state = { text: 'Useless Placeholder' };
+    this.state = { 
+      orga: 'Organame', // clientnumber
+      user: 'Username',
+      password: 'Password'
+    };
   }
 
   render() {
     return (
       <View>
-      <TextInput
-        onChangeText={(text) => this.setState({text})}
-        value={this.state.text}
-      />
-      <TextInput
-        onChangeText={(text) => this.setState({text})}
-        value={this.state.text}
-      />
-      <TextInput
-        onChangeText={(text) => this.setState({text})}
-        value={this.state.text}
-      />
-    </View>
-      
+        <TextInput
+          onChangeText={(orga) => this.setState({orga})}
+          value={this.state.orga}
+        />
+        <TextInput
+          onChangeText={(user) => this.setState({user})}
+          value={this.state.user}
+        />
+        <TextInput
+          onChangeText={(password) => this.setState({password})}
+          value={this.state.password}
+        />
+        <Button
+          onPress={onPressLearnMore}
+          title="Log In!"
+          color="#841584"
+          accessibilityLabel="Learn more about this purple button"
+        />
+    </View>      
     );
   }
 }
