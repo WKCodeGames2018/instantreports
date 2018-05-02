@@ -12,4 +12,6 @@ class TokenHelper {
   }
 }
 
-export default new TokenHelper();
+const helper = new TokenHelper();
+
+export default helper;
