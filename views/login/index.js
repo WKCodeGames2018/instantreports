@@ -9,6 +9,9 @@ export default class LoginView extends Component {
       user: 'Username',
       password: 'Password'
     };
+    this._onPress = function() {
+      Alert(`${this.state.orga} ${this.state.user} ${this.state.password}`)
+    }
   }
 
   render() {
@@ -34,10 +37,6 @@ export default class LoginView extends Component {
         />
     </View>      
     );
-  }
-
-  _onPress() {
-    Alert(`${this.state.orga} ${this.state.user} ${this.state.password}`)
   }
 }
  
