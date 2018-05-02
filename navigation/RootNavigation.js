@@ -9,6 +9,7 @@ import OverviewListView from '../views/overview';
 import LoginView from '../views/login';
 import SelectModeView from '../views/selectMode'
 import SocialSecurityView from '../views/ss_available'
+import PDF from '../views/pdf/index';
 // import SelectModeView from '../views/selectMode'
 
 /* const RootStackNavigator = StackNavigator(
@@ -39,6 +40,9 @@ const RootStackNavigator = StackNavigator(
     },
     SocialSecurity: {
       screen: SocialSecurityView
+    },
+    PDF: {
+      screen: PDF
     }
   },
   {
