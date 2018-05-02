@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import { AppRegistry, TextInput, Text, View, Button, Alert } from 'react-native';
+import { StackNavigator } from 'react-navigation';
 import tokenHelper from '../../helper/token'
 
-/*
-  access_token
-  refresh_token
-  token_type
-  expires_in
-*/
+const App = StackNavigator({
+  Login: { screen: LoginView },
+  List: { screen: OverviewListView },
+});
 
 export default class LoginView extends Component {
   constructor(props) {
@@ -33,19 +32,12 @@ export default class LoginView extends Component {
           body: `clientnumber=${this.state.orga}&username=${this.state.user}&password=${this.state.password}`
         });
         let responseJson = await response.json();
-        this.setState({
-          response: responseJson ? JSON.stringify(responseJson) : "yolo"
-        })
-        this.setState({
-          responseCode: response.status ? response.status : "jjj"
-        })
-        this.setState({
-          reqBody: response.bodyUsed ? JSON.stringify(response.bodyUsed) : "noooo"
-        })
-        Alert.alert(tokenHelper.token);
-        tokenHelper.token = responseJson.access_token;
-        Alert.alert(tokenHelper.token);
-        // return Alert.alert(`${this.state.orga} ${this.state.user} ${this.state.password} ${JSON.stringify(responseJson)}`);
+
+        if (responseJson.status == 200) {
+          tokenHelper.token = responseJson.access_token;
+          this.props.navigation.navigate('List');
+        }
+        
       } catch (error) {
         console.error(error);
       }
@@ -55,15 +47,6 @@ export default class LoginView extends Component {
   render() {
     return (
       <View>
-        <Text>
-         {this.state.responseCode}
-        </Text>
-        <Text>
-          {this.state.reqBody}
-        </Text>
-        <Text>
-          {this.state.response}
-        </Text>
         <TextInput
           onChangeText={(orga) => this.setState({orga})}
           value={this.state.orga}
