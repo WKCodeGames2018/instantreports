@@ -30,7 +30,7 @@ export default class SocialSecurity extends Component {
       Alert.alert(this.state.token);
       try {
         let response = await fetch(this.state.baseUrl, {
-          method: 'POST',
+          method: 'GET',
           headers: {
             Accept: 'application/json',
             'Authorization': this.state.token
