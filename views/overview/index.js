@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 import { AppRegistry, TextInput, View, ListView, Text,StyleSheet,Button,Icon,Alert} from 'react-native';
-
+import tokenHelper from '../../helper/token';
+import config  from '../../helper/config';
 
 class RowData{
 
-  constructor(firstname,name,create,sended){
+  constructor(firstname,name,create,sended,doc){
     this.name = name;
     this.create = create;
     this.sended = sended;
     this.firstname = firstname;
     this.icon = firstname[0]+name[0];
+    this.doc = doc;
   }
 }
 
@@ -18,19 +20,48 @@ export default class OverviewListView extends Component {
     super(props);
     this.state = { text: 'Useless Placeholder' };
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}); 
+    this.messages = [];
     this.state = {
-      dataSource: ds.cloneWithRows([
-        new RowData("Marcel","Weissgerber","2018-05-02",""),
-        new RowData("Edwin","Draser","2018-05-02","error"),
-        new RowData("Julian","Donauer","2018-05-02","2018-05-02 11:00:11"),
-        new RowData("Sebastian","Abele","2018-05-02","pending")
-         
-        
-      ])
+      dataSource: ds.cloneWithRows(this.messages),
+      baseUrl: "https://ocde-pg.wktaa.de/sdn/rest/api/payroll/instantmessage/",
+      token: `Bearer ${tokenHelper.token}`
         
     
     };
+
+    this._getSofortmeldungen = async function() {
+      try {
+        const req = new Request(`${this.state.baseUrl}?organization=${config.orgaId}`);
+
+        req.headers = {
+          Accept: 'application/json', 
+          'Authorization': this.state.token
+        }  
+
+        let response = await fetch(req); 
+        let responseJson = await response.json();
+
+        if (response.status == 200) { 
+
+          responseJson.data.map(x=>this.messages.push(new RowData(x.vorname,x.nachname,x.eintrittsdatum,x.sendedatum,x.fileName)));
+
+        } else {
+          Alert.alert("Oo smth. went wrong, response code " + response.status);
+        }
+      } catch (e) {
+        Alert.alert(e.message);
+      
+      }
+      this.setState({
+        dataSource: this.state.dataSource.cloneWithRows(this.messages)
+      })
+    
+    }
+
+    this._getSofortmeldungen();
   }
+
+  
 
   render() {
     return (
@@ -54,7 +85,12 @@ export default class OverviewListView extends Component {
 <Text style={styles.bold}>{d.firstname} {d.name}</Text>
 <Text>Created: {d.create}</Text>
 <Text>Sended: {d.sended}</Text>
-
+<Button style={{flex:1}}
+  onPress={function () {config.doc=d.doc;this.props.navigation.navigate('PDF')}.bind(this)}  
+  title="PDF"
+  color="#841584"
+  accessibilityLabel="Learn more about this purple button"
+/>
 </View>
 
 
@@ -86,7 +122,7 @@ const styles = StyleSheet.create({
   itemcontainer:{
     flex:1,
     flexDirection:"row",
-    height:70,
+    height:100,
     margin:1,
     backgroundColor:"#fff",
   },
@@ -107,7 +143,7 @@ const styles = StyleSheet.create({
     padding:10,
     textAlign:"center",
     justifyContent:"center", 
-    marginTop:10,
+    marginTop:30,
   },
   errors:{
     backgroundColor:"#E57373",
