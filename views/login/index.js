@@ -25,46 +25,11 @@ export default class LoginView extends Component {
           }),
         });
         let responseJson = await response.json();
-        return Alert.alert(JSON.stringify(responseJson));
+        return Alert.alert(`${this.state.orga} ${this.state.user} ${this.state.password} ${JSON.stringify(responseJson)}`);
       } catch (error) {
         console.error(error);
       }
     }
-      /* const xhr = new XMLHttpRequest();
-      const data = new FormData();
-      data.append('username', this.state.user);
-      data.append('password', this.state.password);
-      data.append('clientnumber', this.state.org);
-      
-      xhr.open("POST", this.state.baseUrl, true);
-
-      xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-
-      xhr.addEventListener("progress", function() { Alert.alert("progress")});
-      xhr.addEventListener("load", function() { Alert.alert("load")});
-      xhr.addEventListener("error", function() { Alert.alert("error")});
-      xhr.addEventListener("abort", function() { Alert.alert("abort")});
-
-      xhr.onreadystatechange = function() {//Call a function when the state changes.
-        
-        if(xhr.readyState == XMLHttpRequest.DONE && xhr.status) {
-          if (xhr.status === "403") {
-            return Alert.alert("403")
-          }
-          if (xhr.status === "200") {
-            return Alert.alert("200")
-          }
-          if (xhr.status === "401") {
-            return Alert.alert("401")
-          }
-          return Alert.alert("yolo")
-        }
-      }.bind(this)
-
-      xhr.send({ form: data }); 
-      // xhr.send(`clientnumber=${this.state.orga}&username=${this.state.user}&password=${this.state.password}`);
-      // Alert.alert(`${this.state.orga} ${this.state.user} ${this.state.password}`)
-    } */
   }
 
   render() {
