@@ -21,11 +21,11 @@ export default class App extends React.Component {
       );
     } else {
       return (
-        <View style={styles.container}>
+        //<View style={styles.container}>
         <LoginView />
           /* {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
           <RootNavigation /> */
-        </View>
+        //</View>
       );
     }
   }
