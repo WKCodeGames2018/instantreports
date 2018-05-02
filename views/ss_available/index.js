@@ -27,13 +27,13 @@ export default class SocialSecurity extends Component {
             Accept: 'application/json',
             'Content-Type': 'application/x-www-form-urlencoded',
           },
-          body: {
-            "vorname": this.state.firstName,
-            "nachname": this.state.surName,
-            "svnummer": this.state.socialSecurityNo,
-            "betriebstaettenummer": this.state.selectedLocation,
-            "eintrittsdatum": this.state.entranceDate
-          }
+          body: JSON.stringify({
+            vorname: this.state.firstName,
+            nachname: this.state.surName,
+            svnummer: this.state.socialSecurityNo,
+            betriebstaettenummer: this.state.selectedLocation,
+            eintrittsdatum: this.state.entranceDate
+          })
         });
         let responseJson = await response.json();
 
