@@ -27,7 +27,6 @@ export default class LoginView extends Component {
           value={this.state.password}
         />
         <Button
-          onPress={onPressLearnMore}
           title="Log In!"
           color="#841584"
           accessibilityLabel="Learn more about this purple button"
