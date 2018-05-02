@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { AppRegistry, TextInput } from 'react-native';
 
-export default class UselessTextInput extends Component {
+export default class LoginView extends Component {
   constructor(props) {
     super(props);
     this.state = { text: 'Useless Placeholder' };
