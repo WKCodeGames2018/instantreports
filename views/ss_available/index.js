@@ -47,7 +47,7 @@ export default class SocialSecurity extends Component {
             vorname: this.state.firstName,
             nachname: this.state.surName,
             svnummer: this.state.socialSecurityNo,
-            betriebstaettenummer: this.state.selectedLocation,
+            betriebstaettenummer: this.state.selectedLocation.betriebsnummer,
             eintrittsdatum: this.state.entranceDate
           })
         })
