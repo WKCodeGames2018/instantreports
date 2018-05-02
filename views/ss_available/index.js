@@ -25,7 +25,7 @@ export default class SocialSecurity extends Component {
           method: 'POST',
           headers: {
             Accept: 'application/json',
-            'Content-Type': 'application/x-www-form-urlencoded',
+            'Content-Type': 'application/json',
           },
           body: JSON.stringify({
             vorname: this.state.firstName,
