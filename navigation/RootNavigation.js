@@ -5,7 +5,10 @@ import { StackNavigator } from 'react-navigation';
 import MainTabNavigator from './MainTabNavigator';
 import registerForPushNotificationsAsync from '../api/registerForPushNotificationsAsync';
 
-const RootStackNavigator = StackNavigator(
+import OverviewListView from '../views/overview';
+import LoginView from '../views/login';
+
+/* const RootStackNavigator = StackNavigator(
   {
     Main: {
       screen: MainTabNavigator,
@@ -17,6 +20,20 @@ const RootStackNavigator = StackNavigator(
         fontWeight: 'normal',
       },
     }),
+  }
+); */
+
+const RootStackNavigator = StackNavigator(
+  {
+    Login: {
+      screen: LoginView,
+    },
+    Details: {
+      screen: OverviewListView,
+    },
+  },
+  {
+    initialRouteName: 'Login',
   }
 );
 

@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import { AppRegistry, TextInput, Text, View, Button, Alert } from 'react-native';
-import { StackNavigator } from 'react-navigation';
-import OverviewListView from '../overview'
-import tokenHelper from '../../helper/token'
-
+import tokenHelper from '../../helper/token';
 
 export default class LoginView extends Component {
   constructor(props) {
