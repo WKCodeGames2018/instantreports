@@ -16,13 +16,13 @@ export default class SelectModeView extends Component {
           accessibilityLabel="Learn more about this purple button"
         />  
         <Button
-          onPress={() => this.props.navigation.navigate('Details')}
+          onPress={() => this.props.navigation.navigate('SocialSecurity')}
           title="Social-Security-No. available"
           color="#841584"
           accessibilityLabel="Learn more about this purple button"
         />
         <Button
-          onPress={() => this.props.navigation.navigate('Details')}
+          onPress={() => this.props.navigation.navigate('NoSocialSecurity')}
           title="Social-Security-No. not available"
           color="#841584"
           accessibilityLabel="Learn more about this purple button"

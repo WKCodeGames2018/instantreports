@@ -8,6 +8,8 @@ import registerForPushNotificationsAsync from '../api/registerForPushNotificatio
 import OverviewListView from '../views/overview';
 import LoginView from '../views/login';
 import SelectModeView from '../views/selectMode'
+import SocialSecurity from '../views/ss_available'
+// import SelectModeView from '../views/selectMode'
 
 /* const RootStackNavigator = StackNavigator(
   {
@@ -35,6 +37,12 @@ const RootStackNavigator = StackNavigator(
     SelectMode: {
       screen: SelectModeView,
     },
+    SocialSecurity: {
+      screen: SocialSecurityView
+    },
+    NoSocialSecurity: {
+      screen: NoSocialSecurityView
+    }
   },
   {
     initialRouteName: 'Login',
