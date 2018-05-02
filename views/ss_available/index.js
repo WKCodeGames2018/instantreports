@@ -75,7 +75,7 @@ export default class SocialSecurity extends Component {
           : null} 
           <DatePicker
             style={{width: 200}}
-            date={this.state.date}
+            date="2018-05-01"
             mode="date"
             placeholder="select date"
             format="YYYY-MM-DD"
