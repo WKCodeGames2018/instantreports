@@ -25,7 +25,7 @@ export default class LoginView extends Component {
           }),
         });
         let responseJson = await response.json();
-        return Alert.alert(JSON.stringify(responseJson.movies));
+        return Alert.alert(JSON.stringify(responseJson));
       } catch (error) {
         console.error(error);
       }
