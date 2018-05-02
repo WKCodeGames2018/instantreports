@@ -39,9 +39,6 @@ const RootStackNavigator = StackNavigator(
     },
     SocialSecurity: {
       screen: SocialSecurityView
-    },
-    NoSocialSecurity: {
-      screen: NoSocialSecurityView
     }
   },
   {
