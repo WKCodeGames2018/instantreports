@@ -37,7 +37,7 @@ export default class OverviewListView extends Component {
         
         <View> 
       <Button style={{flex:1}}
-  onPress={this.props.navigation.navigate('SelectMode')}  
+  onPress={function () {this.props.navigation.navigate('SelectMode')}}  
   title="New immediate notice"
   color="#841584"
   accessibilityLabel="Learn more about this purple button"

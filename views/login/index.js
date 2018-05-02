@@ -16,7 +16,7 @@ export default class LoginView extends Component {
     };
 
     this._onPress = async function() {
-      this.props.navigation.navigate('List');
+      return this.props.navigation.navigate('List');
       try {
         let response = await fetch(this.state.baseUrl, {
           method: 'POST',
