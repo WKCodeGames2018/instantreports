@@ -28,13 +28,13 @@ export default class SocialSecurity extends Component {
           Accept: 'application/json',
           'Authorization': this.state.token
         }
-        req.body = JSON.stringify({
+        req.body = {
           vorname: this.state.firstName,
           nachname: this.state.surName,
           svnummer: this.state.socialSecurityNo,
           betriebstaettenummer: this.state.selectedLocation,
           eintrittsdatum: this.state.entranceDate
-        })
+        }
         let response = await fetch(req);
         let responseJson = await response.json();
 
