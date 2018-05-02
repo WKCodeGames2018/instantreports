@@ -43,8 +43,8 @@ export default class LoginView extends Component {
           reqBody: response.bodyUsed ? JSON.stringify(response.bodyUsed) : "noooo"
         })
         Alert.alert(tokenHelper.token);
-        tokenHelper.token = responseJson.
-        Alert.alert(tokenHelper.access_token);
+        tokenHelper.token = responseJson.access_token;
+        Alert.alert(tokenHelper.token);
         // return Alert.alert(`${this.state.orga} ${this.state.user} ${this.state.password} ${JSON.stringify(responseJson)}`);
       } catch (error) {
         console.error(error);
