@@ -40,6 +40,7 @@ export default class SocialSecurity extends Component {
           method: 'POST',
           headers: {
             Accept: 'application/json',
+            'Authorization': this.state.token,
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
