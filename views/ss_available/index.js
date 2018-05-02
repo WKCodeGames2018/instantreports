@@ -21,7 +21,7 @@ export default class SocialSecurity extends Component {
 
     this._register = async function () {
       try {
-        const req = new Request(`${this.state.baseUrl}?organization=${config.orgaId}`);
+        const req = new Request(`${this.state.registerUrl}?organization=${config.orgaId}`);
 
         req.method = 'POST';
         req.headers = {
