@@ -20,7 +20,7 @@ export default class LoginView extends Component {
             'Content-Type': 'application/x-www-form-urlencoded',
           },
           body: JSON.stringify({
-            user: this.state.user,
+            username: this.state.user,
             password: this.state.password,
             clientnumber: this.state.orga
           }),
