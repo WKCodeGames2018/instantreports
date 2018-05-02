@@ -10,6 +10,7 @@ export default class LoginView extends Component {
       password: 'Password',
       baseUrl: 'https://ocde-pg.wktaa.de/sdn/oauth/token?response_type=code&grant_type=password',
       responseCode: 0,
+      reqBody: 'body',
       response: 'empty' // clientnumber=addisonadmin&username=admin&password=admin
     };
 
@@ -30,7 +31,8 @@ export default class LoginView extends Component {
         let responseJson = await response.json();
         this.setState({
           response: JSON.stringify(responseJson),
-          responseCode: responseJson.status
+          responseCode: responseJson.status,
+          reqBody: JSON.stringify(responseJson.bodyUsed)
         })
         // return Alert.alert(`${this.state.orga} ${this.state.user} ${this.state.password} ${JSON.stringify(responseJson)}`);
       } catch (error) {
@@ -42,6 +44,15 @@ export default class LoginView extends Component {
   render() {
     return (
       <View>
+        <Text>
+         {this.state.responseCode}
+        </Text>
+        <Text>
+          {this.state.reqBody}
+        </Text>
+        <Text>
+          {this.state.response}
+        </Text>
         <TextInput
           onChangeText={(orga) => this.setState({orga})}
           value={this.state.orga}
@@ -59,13 +70,7 @@ export default class LoginView extends Component {
           title="Log In!"
           color="#841584"
           accessibilityLabel="Learn more about this purple button"
-        />
-        <Text>
-         {this.state.responseCode}
-        </Text>
-        <Text>
-          {this.state.response}
-        </Text>
+        />        
     </View>      
     );
   }
