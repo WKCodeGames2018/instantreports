@@ -38,7 +38,7 @@ export default class SocialSecurity extends Component {
         let response = await fetch(req);
         let responseJson = await response.json();
 
-        if (response.status == 200) {
+        if (response.status == 201) {
           this.props.navigation.navigate('List');
         } else {
           Alert.alert("Oo smth. went wrong, pls check your inputs");
