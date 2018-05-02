@@ -1,14 +1,14 @@
 class TokenHelper {
   constructor() {
-    this.token = '';
+    this._token = '';
   }
 
   get token() {
-    return this.token;
+    return this._token;
   }
 
   set token(tokenString) {
-    this.token = tokenString;
+    this._token = tokenString;
   }
 }
 

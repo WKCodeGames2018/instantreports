@@ -28,7 +28,7 @@ export default class LoginView extends Component {
           method: 'POST',
           headers: {
             Accept: 'application/json',
-            'Authorization:': 'application/x-www-form-urlencoded',
+            'Content-Type:': 'application/x-www-form-urlencoded',
           },
           body: `clientnumber=${this.state.orga}&username=${this.state.user}&password=${this.state.password}`
         });
