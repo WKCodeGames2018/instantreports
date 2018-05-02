@@ -21,6 +21,7 @@ export default class LoginView extends Component {
       } catch (error) {
         console.error(error);
       }
+    }
       /* const xhr = new XMLHttpRequest();
       const data = new FormData();
       data.append('username', this.state.user);
