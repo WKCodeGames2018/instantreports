@@ -18,9 +18,9 @@ export default class LoginView extends Component {
       xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
       xhr.onreadystatechange = function() {//Call a function when the state changes.
-        Alert.alert("hallo")
+        
         if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
-            // Request finished. Do processing here.
+          Alert.alert(xhr.status)
         }
       }
 
