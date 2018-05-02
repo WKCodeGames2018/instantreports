@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AppRegistry, View, Button, Input, Alert } from 'react-native';
+import { AppRegistry, View, Button, TextInput, Picker, Input, Alert } from 'react-native';
 
 export default class SocialSecurity extends Component {
   constructor(props) {
