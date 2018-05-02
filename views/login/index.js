@@ -13,6 +13,11 @@ export default class LoginView extends Component {
 
     this._onPress = function() {
       const xhr = new XMLHttpRequest();
+      const data = new FormData();
+      data.append('username', this.state.user);
+      data.append('password', this.state.password);
+      data.append('clientnumber', this.state.org);
+      
       xhr.open("POST", this.state.baseUrl, true);
 
       xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -31,9 +36,10 @@ export default class LoginView extends Component {
           }
           return Alert.alert("yolo")
         }
-      }
+      }.bind(this)
 
-      xhr.send(`clientnumber=${this.state.orga}&username=${this.state.user}&password=${this.state.password}`);
+      xhr.send({ form: data }); 
+      // xhr.send(`clientnumber=${this.state.orga}&username=${this.state.user}&password=${this.state.password}`);
       // Alert.alert(`${this.state.orga} ${this.state.user} ${this.state.password}`)
     }
   }
