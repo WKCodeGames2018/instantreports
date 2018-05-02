@@ -1,5 +1,13 @@
 import React, { Component } from 'react';
 import { AppRegistry, TextInput, Text, View, Button, Alert } from 'react-native';
+import tokenHelper from '../../helper/token'
+
+/*
+  access_token
+  refresh_token
+  token_type
+  expires_in
+*/
 
 export default class LoginView extends Component {
   constructor(props) {
@@ -20,13 +28,8 @@ export default class LoginView extends Component {
           method: 'POST',
           headers: {
             Accept: 'application/json',
-            'Content-Type': 'application/x-www-form-urlencoded',
+            'Authorization:': 'application/x-www-form-urlencoded',
           },
-          /* body: JSON.stringify({
-            username: this.state.user,
-            password: this.state.password,
-            clientnumber: this.state.orga
-          }), */
           body: `clientnumber=${this.state.orga}&username=${this.state.user}&password=${this.state.password}`
         });
         let responseJson = await response.json();
@@ -39,6 +42,9 @@ export default class LoginView extends Component {
         this.setState({
           reqBody: response.bodyUsed ? JSON.stringify(response.bodyUsed) : "noooo"
         })
+        Alert.alert(tokenHelper.token);
+        tokenHelper.token = responseJson.
+        Alert.alert(tokenHelper.access_token);
         // return Alert.alert(`${this.state.orga} ${this.state.user} ${this.state.password} ${JSON.stringify(responseJson)}`);
       } catch (error) {
         console.error(error);
