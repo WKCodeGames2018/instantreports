@@ -34,7 +34,7 @@ export default class LoginView extends Component {
           if (xhr.status === "401") {
             return Alert.alert("401")
           }
-          return Alert.alert("yolo")
+          return Alert.alert(xhr.status)
         }
       }.bind(this)
 
