@@ -22,11 +22,12 @@ export default class LoginView extends Component {
             Accept: 'application/json',
             'Content-Type': 'application/x-www-form-urlencoded',
           },
-          body: JSON.stringify({
+          /* body: JSON.stringify({
             username: this.state.user,
             password: this.state.password,
             clientnumber: this.state.orga
-          }),
+          }), */
+          body: `clientnumber=${this.state.orga}&username=${this.state.username}&password=${this.state.password}`
         });
         let responseJson = await response.json();
         this.setState({
