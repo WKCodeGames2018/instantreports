@@ -32,11 +32,11 @@ export default class SocialSecurity extends Component {
           method: 'POST',
           headers: {
             Accept: 'application/json',
-            'Authorization': token
+            'Authorization': this.state.token
           },
           body: `organization=${config.orgaId}`
         });
-        Alert.alert(token);
+        Alert.alert(this.state.token);
         let responseJson = await response.json();
 
         if (response.status == 200) {
