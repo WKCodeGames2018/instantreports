@@ -19,7 +19,7 @@ export default class SocialSecurity extends Component {
       token: `Bearer ${tokenHelper.token}`
     }
 
-    this._register = function () {
+    this._register = async function () {
       try {
         let response = await fetch(`${this.state.registerUrl}?organization=${config.orgaId}`, {
           method: 'POST',
