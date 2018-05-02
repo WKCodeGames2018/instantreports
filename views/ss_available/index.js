@@ -60,7 +60,8 @@ export default class SocialSecurity extends Component {
           onChangeText={(socialSecurityNo) => this.setState({socialSecurityNo})}
           value={this.state.socialSecurityNo}
         />
-        <Picker
+        {this.state.locations.length ? (
+          <Picker
           selectedValue={this.state.selectedLocation}
           style={{ height: 50, width: 100 }}
           onValueChange={(item, itemIndex) => this.setState({selectedLocation: item})}>
@@ -70,6 +71,8 @@ export default class SocialSecurity extends Component {
             );
           })}
         </Picker>
+        ) : false}
+        
         <Button
           onPress={this._register.bind(this)}
           title="Send Data"
