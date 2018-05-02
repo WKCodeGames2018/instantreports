@@ -27,6 +27,6 @@ export default class LoginView extends Component {
     );
   }
 }
-
+ 
 // skip this line if using Create React Native App
 AppRegistry.registerComponent('codegames', () => LoginView);
