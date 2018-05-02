@@ -2,7 +2,6 @@ import { Alert } from 'react-native';
 
 class TokenHelper {
   constructor() {
-    Alert.alert("Create Token")
     this._token = '';
   }
 
@@ -11,7 +10,6 @@ class TokenHelper {
   }
 
   set token(tokenString) {
-    Alert.alert("token: " + tokenString)
     this._token = tokenString;
   }
 }

@@ -6,9 +6,9 @@ export default class LoginView extends Component {
   constructor(props) {
     super(props);
     this.state = { 
-      orga: 'orga', // clientnumber
+      orga: 'codegames', // clientnumber
       user: 'ben.anderson',
-      password: 'Password',
+      password: '123',
       baseUrl: 'https://ocde-pg.wktaa.de/sdn/oauth/token?response_type=code&grant_type=password',
       responseCode: 0,
       reqBody: 'body',
@@ -16,7 +16,6 @@ export default class LoginView extends Component {
     };
 
     this._onPress = async function() {
-      return this.props.navigation.navigate('List');
       try {
         let response = await fetch(this.state.baseUrl, {
           method: 'POST',
@@ -30,7 +29,7 @@ export default class LoginView extends Component {
 
         if (response.status == 200) {
           tokenHelper.token = responseJson.access_token;
-          // this.props.navigation.navigate('List');
+          this.props.navigation.navigate('List');
         } else {
           Alert.alert("Oo smth. went wrong, pls check your inputs");
         }

@@ -37,7 +37,6 @@ export default class SocialSecurity extends Component {
           },
           body: `organization=${config.orgaId}`
         });
-        Alert.alert(this.state.token);
         let responseJson = await response.json();
 
         if (response.status == 200) {
