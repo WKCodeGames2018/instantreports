@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { AppRegistry, View, Button, TextInput, Picker, Input, Alert } from 'react-native';
+import config  from '../../helper/config';
+import tokenHelper from '../../helper/token'
 
 export default class SocialSecurity extends Component {
   constructor(props) {
@@ -10,6 +12,7 @@ export default class SocialSecurity extends Component {
       entranceDate: 1525273779950,
       socialSecurityNo: "ss_no",
       selectedLocation: "",
+      baseUrl: "https://ocde-pg.wktaa.de/sdn/rest/api/payroll/firmendatenapicontract",
       locations: [
         {
           "name": "Restaurant Wok n Roll",
@@ -20,6 +23,28 @@ export default class SocialSecurity extends Component {
 
     this._register = function () {
       Alert.alert("Yolo")
+    }
+
+    this._getLocations = async function() {
+      try {
+        let response = await fetch(this.state.baseUrl, {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json',
+            'Authorization': `Bearer ${tokenHelper.token}`,
+          },
+          body: `organization=${config.orgaId}`
+        });
+        let responseJson = await response.json();
+
+        if (response.status == 200) {
+          Alert.alert(JSON.stringify(responseJson);
+        } else {
+          Alert.alert("Oo smth. went wrong, response code " + response.status);
+        }
+      } catch (e) {
+        Alert.alert("Could not fetch locations");
+      }
     }
   }
 
@@ -50,7 +75,7 @@ export default class SocialSecurity extends Component {
         </Picker>
         <Button
           onPress={this._register.bind(this)}
-          title="QR-Code"
+          title="Send Data"
           color="#841584"
           accessibilityLabel="Learn more about this purple button"
         />     
