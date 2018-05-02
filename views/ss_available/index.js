@@ -61,18 +61,18 @@ export default class SocialSecurity extends Component {
           onChangeText={(socialSecurityNo) => this.setState({socialSecurityNo})}
           value={this.state.socialSecurityNo}
         />
-        {this.state.locations.length > 0 && 
+        {this.state.locations.length > 0 ? 
           <Picker
-          selectedValue={this.state.selectedLocation}
-          style={{ height: 50, width: 100 }}
-          onValueChange={(item, itemIndex) => this.setState({selectedLocation: item})}>
-          {this.state.locations.map((item, key) => {
-            return (
-              <Picker.Item label={item.name} key={key} value={item.betriebsnummer} />
-            );
-          })}
-        </Picker>
-        }        
+            selectedValue={this.state.selectedLocation}
+            style={{ height: 50, width: 100 }}
+            onValueChange={(item, itemIndex) => this.setState({selectedLocation: item})}>
+            {this.state.locations.map((item, key) => {
+              return (
+                <Picker.Item label={item.name} key={key} value={item.betriebsnummer} />
+              );
+            })}
+          </Picker>
+          : null}     
         <Button
           onPress={this._register.bind(this)}
           title="Send Data"
