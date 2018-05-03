@@ -14,7 +14,7 @@ export default class PDF extends Component {
         source={{uri: 'http://docs.google.com/viewer?url\x3dhttps%3A%2F%2Focde-pg.wktaa.de/sdn/publicfiles/'+config.doc+'?folder=Documents'}}
         style={{marginTop: 2}}  
       />); 
-    }
+    } 
 } 
 var styles = StyleSheet.create({
     pdf: {
