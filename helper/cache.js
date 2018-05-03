@@ -1,25 +1,22 @@
 class Cache {
   constructor() {
-    this._storage = new Map();
+    this._storage = new Set();
   }
 
-  addItem(key, item) {    
-    return this._storage.set(key, item);
+  addItem(item) {    
+    return this._storage.add(JSON.stringify(item));
   }
 
-  getItem(key) {
-    let val = null;
+  deleteItem(item) {
+    return this._storage.delete(JSON.stringify(item));   
+  }
 
-    if (this._storage.has(key)) {
-      val = this._storage.get(key)
-      this._storage.delete(key)
-    }
-
-    return val;
+  getItems() {
+    return [...this._storage].map(item => JSON.parse(item));
   }
 
   get length() {
-    return this._storage.size
+    return this._storage.size;
   }
 }
 

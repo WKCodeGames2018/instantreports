@@ -32,15 +32,15 @@ export default class OverviewListView extends Component {
     this.state = {
       dataSource: ds.cloneWithRows(this.messages),
       baseUrl: "https://ocde-pg.wktaa.de/sdn/rest/api/payroll/instantmessage/",
-      token: `Bearer ${tokenHelper.token}`
-        
-     
+      token: `Bearer ${tokenHelper.token}`,
+      pollIntervall: null   
     };
 
+    this._getSofortmeldungen = async function() {
+      const prepMessages = []
+      const resWorkers = []
 
-
-    this._getSofortmeldungen = async function() { 
-      try {
+      try {        
         const req = new Request(`${this.state.baseUrl}?organization=${config.orgaId}`);
 
         req.headers = {
@@ -52,8 +52,8 @@ export default class OverviewListView extends Component {
         let responseJson = await response.json();
 
         if (response.status == 200) { 
-
-          responseJson.data.map(x=>this.messages.push(new RowData(x.vorname,x.nachname,x.eintrittsdatum,x.sendedatum,x.fileName)));          
+          resWorkers = responseJson.data
+          resWorkers.map(x=>prepMessages.push(new RowData(x.vorname,x.nachname,x.eintrittsdatum,x.sendedatum,x.fileName)));          
 
         } else {
           Alert.alert("Oo smth. went wrong, response code " + response.status);
@@ -64,8 +64,20 @@ export default class OverviewListView extends Component {
       }
       finally {
         if (cache.length) {
-          const worker = cache.getItem("instantreport");
-          this.messages.push(new RowData(worker.vorname,worker.nachname,worker.eintrittsdatum,"pending", ""))
+          resWorkers.map(worker => {
+            cache.deleteItem({
+              vorname: worker.vorname,
+              nachname: worker.vornnachnameame,
+              svnummer: worker.svnummer,
+              betriebstaettenummer: worker.betriebstaettenummer,
+              eintrittsdatum: worker.voreintrittsdatumname
+            })
+          })
+          const workers = cache.getItems();
+          workers.map(worker => {
+            prepMessages.push(new RowData(worker.vorname,worker.nachname,worker.eintrittsdatum,"pending", ""))            
+          })     
+          this.setState({messages: prepMessages})     
         }
       }
       this.setState({
@@ -75,6 +87,9 @@ export default class OverviewListView extends Component {
     }
 
     this._getSofortmeldungen();
+    this.setState({pollIntervall: setInterval( () => {
+      this._getSofortmeldungen();
+    }, 5000)})    
   }
 
 
