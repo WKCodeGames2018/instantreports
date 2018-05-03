@@ -139,16 +139,18 @@ export default class SocialSecurity extends Component {
      
        </View>
        {this.state.locations && this.state.locations.length > 0 ? 
-        <Picker
-          selectedValue={this.state.selectedLocation}
-          style={{height: 50, flex: 1}}
-          onValueChange={(item, itemIndex) => this.setState({selectedLocation: item})}>
-          {this.state.locations.map((item, key) => {
-            return (
-              <Picker.Item label={item.name} key={key} value={item.betriebsnummer} />
-            );
-          })}
-        </Picker>
+        <View style={{height: 50}}>
+          <Picker
+            selectedValue={this.state.selectedLocation}
+            style={{flex: 1}}
+            onValueChange={(item, itemIndex) => this.setState({selectedLocation: item})}>
+            {this.state.locations.map((item, key) => {
+              return (
+                <Picker.Item label={item.name} key={key} value={item.betriebsnummer} />
+              );
+            })}
+          </Picker>
+        </View>
         : null} 
         <TextInput style={styles.field}
           onChangeText={(socialSecurityNo) => this.setState({socialSecurityNo})}
