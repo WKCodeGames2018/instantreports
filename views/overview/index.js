@@ -89,6 +89,7 @@ export default class OverviewListView extends Component {
         this.setState({
           dataSource: this.state.dataSource.cloneWithRows(this.messages)
         })
+        this.forceUpdate()
       }
       
     
