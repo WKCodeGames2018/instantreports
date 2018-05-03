@@ -40,7 +40,7 @@ export default class SocialSecurity extends Component {
         let responseJson = await response.json();
 
         if (response.status == 201) {          
-          cache.addItem("instantreport", {
+          cache.addItem({
             vorname: this.state.firstName,
             nachname: this.state.surName,
             svnummer: this.state.socialSecurityNo,
