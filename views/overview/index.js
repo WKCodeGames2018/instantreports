@@ -74,6 +74,7 @@ export default class OverviewListView extends Component {
           })
           const workers = cache.getItems();
           workers.map(worker => {
+            Alert.alert(JSON.stringify(worker))
             prepMessages.push(new RowData(worker.vorname,worker.nachname,worker.eintrittsdatum,"pending", ""))            
           })                
         }
