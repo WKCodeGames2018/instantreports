@@ -32,8 +32,7 @@ export default class OverviewListView extends Component {
     this.state = {
       dataSource: ds.cloneWithRows(this.messages),
       baseUrl: "https://ocde-pg.wktaa.de/sdn/rest/api/payroll/instantmessage/",
-      token: `Bearer ${tokenHelper.token}`,
-      pollIntervall: null   
+      token: `Bearer ${tokenHelper.token}`
     };
 
     this._getSofortmeldungen = async function() {
@@ -87,9 +86,9 @@ export default class OverviewListView extends Component {
     }
 
     this._getSofortmeldungen();
-    this.setState({pollIntervall: setInterval( () => {
+    this.state.pollIntervall = setInterval( () => {
       this._getSofortmeldungen();
-    }, 5000)})    
+    }, 5000)}  
   }
 
 
