@@ -99,6 +99,10 @@ export default class OverviewListView extends Component {
     }    
   }
 
+  componentWillUnmount() {
+    clearInterval(this.state.pollIntervall)
+  }
+
 
 
   renderItem=function(d){
