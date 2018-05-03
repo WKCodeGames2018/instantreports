@@ -3,4 +3,7 @@ export default {
   "domainId": 123,
   "socialSecurityNo": "24310775L306",
   "doc":"",
+  "scanfield1":"",
+
+  
 }

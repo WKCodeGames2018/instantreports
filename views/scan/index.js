@@ -12,6 +12,7 @@ import {
   ToastAndroid,
 } from 'react-native';
 import { BarCodeScanner, Permissions } from 'expo';
+import config from '../../helper/config';
 
 export default class ScanView extends Component {
 
@@ -39,8 +40,8 @@ export default class ScanView extends Component {
     if (result.data !== this.state.lastScannedUrl) { 
       LayoutAnimation.spring();
       this.setState({ lastScannedUrl: result.data });
-      ToastAndroid.show('QR:'+result.data, ToastAndroid.LONG);
-      this.props.navigation.navigate('SelectMode');
+      config.scanfield1=result.data;
+      this.props.navigation.navigate('SocialSecurity');
     }
   };
 
