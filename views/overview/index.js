@@ -38,7 +38,7 @@ export default class OverviewListView extends Component {
 
     this._getSofortmeldungen = async function() {
       const prepMessages = []
-      const resWorkers = []
+      let resWorkers = []
 
       try {        
         const req = new Request(`${this.state.baseUrl}?organization=${config.orgaId}`);
