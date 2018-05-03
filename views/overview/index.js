@@ -88,20 +88,20 @@ export default class OverviewListView extends Component {
 <Text style={styles.bold}>{d.firstname} {d.name}</Text> 
 <Text>Entry date: {d.create}</Text>
 <Text>Send state: {d.sended}</Text>
-<TouchableHighlight onPress={function () {config.doc=d.doc;this.props.navigation.navigate('PDF')}.bind(this)}>
+<TouchableHighlight style={{flex:1}} onPress={function () {config.doc=d.doc;this.props.navigation.navigate('PDF')}.bind(this)}>
 <View style={styles.pdfcontainer}>
 <Image
                 source={require('../../assets/images/pdf.png')}
                 resizeMode="contain"
                 fadeDuration={0}
-                style={{ width: 20, height: 20, marginTop: 1 }}
+                style={{ width: 24, height: 24,flex:0.5}}   
               />
   <Text style={styles.pdftext}>message-{d.firstname} {d.name}</Text>
 
 </View>
 
   </TouchableHighlight>
-</View>
+</View> 
 
 
 
@@ -188,10 +188,15 @@ const styles = StyleSheet.create({
   pdftext:{
     fontWeight:"bold",
     color:"#ddd",
-
+    flex:4,
+    
   },
   pdfcontainer:{
-padding:10,
+flexWrap: "nowrap",
+flexDirection:'row',
+paddingTop:10,
+justifyContent:"flex-start",
+alignItems:'flex-start'
   }, 
   send:{
 padding:10, 
