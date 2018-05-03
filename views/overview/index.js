@@ -77,8 +77,7 @@ export default class OverviewListView extends Component {
             prepMessages.push(new RowData(worker.vorname,worker.nachname,worker.eintrittsdatum,"pending", ""))            
           })                
         }
-        this.setState({messages: prepMessages}) 
-        Alert.alert(this.state.messages.length+"")
+        this.messages = prepMessages
         this.setState({
           dataSource: this.state.dataSource.cloneWithRows(this.messages)
         })
