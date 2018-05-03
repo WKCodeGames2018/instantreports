@@ -93,14 +93,14 @@ export default class OverviewListView extends Component {
     return (
       <View style={{flex: 1}}>
         
-        <View  style={styles.send}> 
+        <View  style={styles.send}>  
       <Button
   onPress={function () {this.props.navigation.navigate('SelectMode')}.bind(this)}  
   title="New immediate notice"
 
   accessibilityLabel="Learn more about this purple button"
 /></View>
-
+ 
 <ListView 
         dataSource={this.state.dataSource} 
         renderRow={(d) => <View style={styles.itemcontainer}
