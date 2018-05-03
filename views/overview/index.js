@@ -84,12 +84,12 @@ export default class OverviewListView extends Component {
       })
     
     }
-    
+
     this._getSofortmeldungen();
     if (!this.state.pollIntervall) {
       this.state.pollIntervall = setInterval( () => {
         this._getSofortmeldungen();
-      }, 5000)}  
+      }, 5000)
     }    
   }
 
