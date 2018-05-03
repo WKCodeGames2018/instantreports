@@ -40,13 +40,14 @@ export default class SocialSecurity extends Component {
           method: 'POST',
           headers: {
             Accept: 'application/json',
+            'Authorization': this.state.token,
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
             vorname: this.state.firstName,
             nachname: this.state.surName,
             svnummer: this.state.socialSecurityNo,
-            betriebstaettenummer: this.state.selectedLocation,
+            betriebstaettenummer: this.state.selectedLocation.betriebsnummer,
             eintrittsdatum: this.state.entranceDate
           })
         })
