@@ -78,6 +78,7 @@ export default class OverviewListView extends Component {
           })                
         }
         this.setState({messages: prepMessages}) 
+        Alert.alert(this.stage.messages.length)
         this.setState({
           dataSource: this.state.dataSource.cloneWithRows(this.messages)
         })
