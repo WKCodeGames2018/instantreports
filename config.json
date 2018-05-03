@@ -1,0 +1,11 @@
+{
+  "dateLibrary":"java8",
+  "invokerPackage":"instantreports",
+  "modelPackage":"instantreports.model",
+  "apiPackage":"instantreports.api",
+  "groupId":"codegames.codefiction",
+  "artifactId":"instantreports-service",
+  "artifactVersion":"1.0.0",
+  "artifactDescription":""
+}
+
