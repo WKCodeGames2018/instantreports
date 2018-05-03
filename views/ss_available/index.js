@@ -3,6 +3,7 @@ import { AppRegistry, View, Button, TextInput, Picker, Input, Alert } from 'reac
 import DatePicker from 'react-native-datepicker'
 import config  from '../../helper/config';
 import tokenHelper from '../../helper/token';
+import cache from '../../helper/cache';
 
 export default class SocialSecurity extends Component {
   constructor(props) {
@@ -20,7 +21,7 @@ export default class SocialSecurity extends Component {
     }
 
     this._register = async function () {
-      try {
+      try {        
         let response = await fetch(`${this.state.registerUrl}?organization=${config.orgaId}`, {
           method: 'POST',
           headers: {
@@ -40,6 +41,13 @@ export default class SocialSecurity extends Component {
 
         if (response.status == 201) {
           this.props.navigation.navigate('List');
+          cache.addItem("instantreport", {
+            vorname: this.state.firstName,
+            nachname: this.state.surName,
+            svnummer: this.state.socialSecurityNo,
+            betriebstaettenummer: this.state.selectedLocation.betriebsnummer,
+            eintrittsdatum: this.state.entranceDate
+          })
         } else {
           Alert.alert("Oo smth. went wrong, pls check your inputs");
         }
