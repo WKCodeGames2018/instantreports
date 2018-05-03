@@ -111,7 +111,7 @@ export default class SocialSecurity extends Component {
             maxDate="2018-07-01"
             confirmBtnText="Confirm"
             cancelBtnText="Cancel"
-            showIcon="false"
+            showIcon={false}
             customStyles={{
               dateIcon: {
                 position: 'absolute',
