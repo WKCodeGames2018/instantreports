@@ -53,7 +53,7 @@ export default class SocialSecurity extends Component {
         }
         
       } catch (error) {
-        Alert.alert("Could not fetch locations");
+        Alert.alert("Could not post dude");
       }
     }
 

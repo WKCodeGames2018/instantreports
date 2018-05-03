@@ -66,15 +66,14 @@ export default class OverviewListView extends Component {
           resWorkers.map(worker => {
             cache.deleteItem({
               vorname: worker.vorname,
-              nachname: worker.vornnachnameame,
+              nachname: worker.nachname,
               svnummer: worker.svnummer,
               betriebstaettenummer: worker.betriebstaettenummer,
-              eintrittsdatum: worker.voreintrittsdatumname
+              eintrittsdatum: worker.eintrittsdatum
             })
           })
           const workers = cache.getItems();
           workers.map(worker => {
-            Alert.alert(JSON.stringify(worker))
             prepMessages.push(new RowData(worker.vorname,worker.nachname,worker.eintrittsdatum,"pending", ""))            
           })                
         }
