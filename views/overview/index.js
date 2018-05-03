@@ -75,9 +75,9 @@ export default class OverviewListView extends Component {
           const workers = cache.getItems();
           workers.map(worker => {
             prepMessages.push(new RowData(worker.vorname,worker.nachname,worker.eintrittsdatum,"pending", ""))            
-          })     
-          this.setState({messages: prepMessages})     
+          })                
         }
+        this.setState({messages: prepMessages}) 
       }
       this.setState({
         dataSource: this.state.dataSource.cloneWithRows(this.messages)
