@@ -78,10 +78,11 @@ export default class OverviewListView extends Component {
           })                
         }
         this.setState({messages: prepMessages}) 
+        this.setState({
+          dataSource: this.state.dataSource.cloneWithRows(this.messages)
+        })
       }
-      this.setState({
-        dataSource: this.state.dataSource.cloneWithRows(this.messages)
-      })
+      
     
     }
 
