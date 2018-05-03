@@ -89,7 +89,7 @@ export default class SocialSecurity extends Component {
         {this.state.locations && this.state.locations.length > 0 ? 
           <Picker
             selectedValue={this.state.selectedLocation}
-            style={{ height: 50, width: 100 }}
+            style={{ flex: 1 }}
             onValueChange={(item, itemIndex) => this.setState({selectedLocation: item})}>
             {this.state.locations.map((item, key) => {
               return (
