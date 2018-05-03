@@ -105,8 +105,8 @@ return messages.length>0?<ListView
 <Text style={[d.sended == "pending"?styles.pending:d.sended == "error"?styles.errors:styles.icon]}>{d.icon}</Text>
 <View style={styles.item}>
 <Text style={styles.bold}>{d.firstname} {d.name}</Text> 
-<Text>Entry date: {d.create}</Text>
-<Text>Send state: {d.sended}</Text>
+<Text style={styles.pdfsub}>Entry date: {d.create}</Text>
+<Text style={styles.pdfsub}>Send state: {d.sended}</Text>
   {this.renderItem(d)} 
 
 </View> 
@@ -166,7 +166,9 @@ const styles = StyleSheet.create({
     padding:4,
   },
   bold:{ 
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    fontSize:18, 
+    paddingLeft:10,
   },
   icon:{
     backgroundColor:"#81C784",
@@ -179,6 +181,7 @@ const styles = StyleSheet.create({
     textAlign:"center",
     justifyContent:"center", 
     marginTop:8,
+ 
   },
   errors:{
     backgroundColor:"#E57373",
@@ -191,7 +194,9 @@ const styles = StyleSheet.create({
     textAlign:"center",
     justifyContent:"center",
     marginTop:8,
-    color:"#000"
+    color:"#000",
+
+    
   },
   pending:{
     backgroundColor:"#FFD54F",
@@ -201,9 +206,11 @@ const styles = StyleSheet.create({
     width:50, 
     height:50,
     padding:10,
-    textAlign:"center",
+    textAlign:"center", 
     justifyContent:"center",
     marginTop:8,
+
+    
   },
   pdf:{
       width:20,
@@ -212,18 +219,26 @@ const styles = StyleSheet.create({
     fontWeight:"bold", 
     color:"#ccc",
     flex:4,
+    fontSize:13,
     
   },
   pdfcontainer:{
 flexWrap: "nowrap",
 flexDirection:'row',
 paddingTop:10,
+paddingLeft:20,
 justifyContent:"flex-start",
-alignItems:'flex-start'
+alignItems:'flex-start',
+
   }, 
+ pdfsub:{
+   color:"#ccc",
+   fontSize:13,
+   paddingLeft:20,
+ },
   send:{
 padding:10, 
-
+ 
   }
 
 });

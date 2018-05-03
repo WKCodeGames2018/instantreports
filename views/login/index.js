@@ -98,13 +98,15 @@ const styles = StyleSheet.create({
     paddingTop:70,  
   },
   field:{
-   
+    
     padding:4,
     margin:8,
     backgroundColor:'#fff', 
     borderRadius: 4, 
-    borderWidth: 0.5,
+    borderWidth: 0.5, 
     borderColor: '#d6d7da',
+ 
+    fontSize:18, 
   },
   send:{
 padding:40,

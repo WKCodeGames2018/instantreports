@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AppRegistry, View, Button, TextInput, Picker, Input, Alert } from 'react-native';
+import { AppRegistry, View, Button, TextInput, Picker, Input, Alert,StyleSheet } from 'react-native';
 import DatePicker from 'react-native-datepicker'
 import config  from '../../helper/config';
 import tokenHelper from '../../helper/token';
@@ -84,19 +84,8 @@ export default class SocialSecurity extends Component {
 
   render() {
     return (
-      <View>
-        <TextInput
-          onChangeText={(surName) => this.setState({surName})}
-          value={this.state.surName}
-        />
-        <TextInput
-          onChangeText={(firstName) => this.setState({firstName})}
-          value={this.state.firstName}
-        />
-        <TextInput
-          onChangeText={(socialSecurityNo) => this.setState({socialSecurityNo})}
-          value={this.state.socialSecurityNo}
-        />
+      <View style={styles.container}>
+        
         {this.state.locations && this.state.locations.length > 0 ? 
           <Picker
             selectedValue={this.state.selectedLocation}
@@ -109,7 +98,7 @@ export default class SocialSecurity extends Component {
             })}
           </Picker>
           : null} 
-          <DatePicker
+          <DatePicker 
             style={{width: 200}}
             date={this.state.entranceDate}
             mode="date"
@@ -134,12 +123,26 @@ export default class SocialSecurity extends Component {
             }}
             onDateChange={(date) => {this.setState({entranceDate: date})}}
           />
+        <TextInput style={styles.field}
+          onChangeText={(socialSecurityNo) => this.setState({socialSecurityNo})}
+          value={this.state.socialSecurityNo}
+        />
+        <TextInput style={styles.field}
+          onChangeText={(surName) => this.setState({surName})}
+          placeholder="surname"
+        />
+        <TextInput style={styles.field}
+          onChangeText={(firstName) => this.setState({firstName})}
+          placeholder="firstname"
+        />
+      
+          <View style={styles.send}>
         <Button
           onPress={this._register.bind(this)}
           title="Send Data"
-          color="#841584"
           accessibilityLabel="Learn more about this purple button"
         />     
+        </View>
     </View>      
     );
   }
@@ -147,3 +150,32 @@ export default class SocialSecurity extends Component {
  
 // skip this line if using Create React Native App
 AppRegistry.registerComponent('codegames', () => SocialSecurity);
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#eee',
+
+  }, 
+  backgroundImage: {
+    flex: 1,
+    width: null,
+    height: null,
+    padding:20,
+    paddingTop:70,  
+  },
+  field:{
+   
+    padding:4,
+    margin:10,
+    backgroundColor:'#fff', 
+    borderRadius: 4, 
+    borderWidth: 0.5,
+    borderColor: '#d6d7da',
+    fontSize:18,
+  },
+  send:{
+padding:10,
+
+  }
+});
