@@ -1,5 +1,5 @@
 class Cache {
-  contructor() {
+  constructor() {
     this._storage = new Map();
   }
 
