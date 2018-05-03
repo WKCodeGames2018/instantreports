@@ -66,9 +66,9 @@ export default class OverviewListView extends Component {
           Alert.alert("Oo smth. went wrong, response code " + response.status);
         }
       } catch (e) {
-        Alert.alert(e.message);
+     
       
-      }
+      } 
       finally {
         if (cache.length) {
           resWorkers.map(worker => {

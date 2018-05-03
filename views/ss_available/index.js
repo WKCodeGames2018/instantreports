@@ -20,6 +20,29 @@ export default class SocialSecurity extends Component {
       token: `Bearer ${tokenHelper.token}`
     }
 
+    if(config.scanfield1!=""){
+      for (wert of config.scanfield1.split("\n")){
+
+        if(wert.indexOf("X-VSNR:")==0){
+          config.socialSecurityNo = wert.substring(7,wert.length-1);
+          this.state.socialSecurityNo = config.socialSecurityNo;
+      
+        }
+        if(wert.indexOf("FN:")==0){
+     
+          config.surName = wert.substring(3,wert.length-1);
+          this.state.surName = config.surName.split(" ")[1];
+          this.state.firstName = config.surName.split(" ")[0];
+
+        }
+      } 
+  }else {
+      this.state.socialSecurityNo ="";
+      this.state.surName = "";
+      this.state.firstName = "";
+      
+  }
+
     this._register = async function () {
       try {        
         let response = await fetch(`${this.state.registerUrl}?organization=${config.orgaId}`, {
@@ -85,55 +108,62 @@ export default class SocialSecurity extends Component {
   render() {
     return (
       <View style={styles.container}>
-        
-        {this.state.locations && this.state.locations.length > 0 ? 
-          <Picker
-            selectedValue={this.state.selectedLocation}
-            style={{ height: 50, width: 100 }}
-            onValueChange={(item, itemIndex) => this.setState({selectedLocation: item})}>
-            {this.state.locations.map((item, key) => {
-              return (
-                <Picker.Item label={item.name} key={key} value={item.betriebsnummer} />
-              );
-            })}
-          </Picker>
-          : null} 
-          <DatePicker 
-            style={{width: 200}}
-            date={this.state.entranceDate}
-            mode="date"
-            placeholder="select date"
-            format="YYYY-MM-DD"
-            minDate="2018-05-03"
-            maxDate="2018-07-01"
-            confirmBtnText="Confirm"
-            cancelBtnText="Cancel"
-            showIcon={false}
-            customStyles={{
-              dateIcon: {
-                position: 'absolute',
-                left: 0,
-                top: 4,
-                marginLeft: 0
-              },
-              dateInput: {
-                marginLeft: 36
-              }
-              // ... You can check the source to find the other keys.
-            }}
-            onDateChange={(date) => {this.setState({entranceDate: date})}}
-          />
+        <View>
+       
+       <DatePicker 
+          style={styles.picker}
+         date={this.state.entranceDate}
+         mode="date"
+         placeholder="select date"
+         format="YYYY-MM-DD"
+         minDate="2018-05-03"
+         maxDate="2018-07-01"
+         confirmBtnText="Confirm"  
+         cancelBtnText="Cancel"
+         showIcon={true}
+         customStyles={{
+           dateIcon: {
+             position: 'absolute',
+             left: 0,
+             top: 4,
+             marginLeft: 0
+           },
+           dateInput: {
+             marginLeft: 36
+           }
+           // ... You can check the source to find the other keys.
+         }}
+         onDateChange={(date) => {this.setState({entranceDate: date})}}
+       />
+
+     {this.state.locations && this.state.locations.length > 0 ? 
+       <Picker
+         selectedValue={this.state.selectedLocation}
+         style={{width:300,height:50}}
+         onValueChange={(item, itemIndex) => this.setState({selectedLocation: item})}>
+         {this.state.locations.map((item, key) => {
+           return (
+             <Picker.Item label={item.name} key={key} value={item.betriebsnummer} />
+           );
+         })}
+       </Picker>
+       : null} 
+       </View>
         <TextInput style={styles.field}
           onChangeText={(socialSecurityNo) => this.setState({socialSecurityNo})}
           value={this.state.socialSecurityNo}
         />
         <TextInput style={styles.field}
           onChangeText={(surName) => this.setState({surName})}
-          placeholder="surname"
+          placeholder="surname" 
+          value={this.state.surName}
+          
         />
         <TextInput style={styles.field}
           onChangeText={(firstName) => this.setState({firstName})}
           placeholder="firstname"
+          value={this.state.firstName}
+          
         />
       
           <View style={styles.send}>
@@ -173,6 +203,17 @@ const styles = StyleSheet.create({
     borderWidth: 0.5,
     borderColor: '#d6d7da',
     fontSize:18,
+  },
+  picker:{
+
+    height:50,
+    padding:4,
+    margin:10,
+    backgroundColor:'#fff', 
+    borderRadius: 4, 
+    borderWidth: 0.5,
+    borderColor: '#d6d7da',
+
   },
   send:{
 padding:10,
