@@ -35,6 +35,11 @@ export default class OverviewListView extends Component {
       token: `Bearer ${tokenHelper.token}`
     };
 
+    this._formatDate = function(date) {
+      const d = new Date(date)
+      return `${d.getDate()}.${d.getMonth()}.${d.getFullYear()}`
+    }
+
     this._getSofortmeldungen = async function() {
       const prepMessages = []
       let resWorkers = []
@@ -69,7 +74,7 @@ export default class OverviewListView extends Component {
               nachname: worker.nachname,
               svnummer: worker.svnummer,
               betriebstaettenummer: worker.betriebstaettenummer,
-              eintrittsdatum: worker.eintrittsdatum
+              eintrittsdatum: this._formatDate(worker.eintrittsdatum)
             })
           })
           const workers = cache.getItems();
