@@ -78,7 +78,7 @@ export default class OverviewListView extends Component {
           })                
         }
         this.setState({messages: prepMessages}) 
-        Alert.alert(this.state.messages.length)
+        Alert.alert(this.state.messages.length+"")
         this.setState({
           dataSource: this.state.dataSource.cloneWithRows(this.messages)
         })
