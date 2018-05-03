@@ -62,7 +62,7 @@ export default class LoginView extends Component {
         <TextInput style={styles.field}
           autoCapitalize={'none'}
           underlineColorAndroid={'transparent'} 
-          onChangeText={(password) => this.setState({password})}
+          onChangeText={(password) => this.setState({password})} 
           value={this.state.password}
           password = {true}
           secureTextEntry={true}
@@ -95,14 +95,14 @@ const styles = StyleSheet.create({
     width: null,
     height: null,
     padding:20,
-    paddingTop:100, 
+    paddingTop:70,  
   },
   field:{
    
     padding:4,
     margin:8,
     backgroundColor:'#fff', 
-    borderRadius: 4,
+    borderRadius: 4, 
     borderWidth: 0.5,
     borderColor: '#d6d7da',
   },

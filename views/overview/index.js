@@ -192,7 +192,7 @@ const styles = StyleSheet.create({
   },
   pdfcontainer:{
 padding:10,
-  },
+  }, 
   send:{
 padding:10, 
 
