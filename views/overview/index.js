@@ -36,8 +36,11 @@ export default class OverviewListView extends Component {
     };
 
     this._formatDate = function(date) {
-      const d = new Date(date)
-      return `${d.getDate()}.${d.getMonth()}.${d.getFullYear()}`
+      const d = d.split(".")
+      const day = d[0] < 10 ? `0${d[0]}` : d[0]  
+      const month = d[1] < 10 ? `0${d[1]}` : d[1]  
+      const year = d[2] < 10 ? `0${d[2]}` : d[2]  
+      return `${year}-${month}-${day}`
     }
 
     this._getSofortmeldungen = async function() {
