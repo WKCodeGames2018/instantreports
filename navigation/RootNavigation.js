@@ -10,6 +10,7 @@ import LoginView from '../views/login';
 import SelectModeView from '../views/selectMode'
 import SocialSecurityView from '../views/ss_available'
 import PDF from '../views/pdf/index';
+import ScanView from '../views/scan/index';
 // import SelectModeView from '../views/selectMode'
 
 /* const RootStackNavigator = StackNavigator(
@@ -43,6 +44,9 @@ const RootStackNavigator = StackNavigator(
     },
     PDF: {
       screen: PDF
+    },
+    QR: {
+      screen: ScanView
     }
   },
   {

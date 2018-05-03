@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { AppRegistry, TextInput, View, ListView, Text,StyleSheet,Button,Icon,Alert} from 'react-native';
+import { AppRegistry, TextInput, View, ListView, Text,StyleSheet,Button,Alert,TouchableHighlight,Image} from 'react-native';
 import tokenHelper from '../../helper/token';
 import config  from '../../helper/config';
+
 
 class RowData{
 
@@ -87,13 +88,22 @@ export default class OverviewListView extends Component {
 <Text style={styles.bold}>{d.firstname} {d.name}</Text> 
 <Text>Created: {d.create}</Text>
 <Text>Sended: {d.sended}</Text>
-<Button style={{flex:1}}
-  onPress={function () {config.doc=d.doc;this.props.navigation.navigate('PDF')}.bind(this)}  
-  title="PDF"
-  color="#841584"
-  accessibilityLabel="Learn more about this purple button"
-/>
+<TouchableHighlight onPress={function () {config.doc=d.doc;this.props.navigation.navigate('PDF')}.bind(this)}>
+<View style={styles.pdfcontainer}>
+<Image
+                source={require('../../assets/images/pdf.png')}
+                resizeMode="contain"
+                fadeDuration={0}
+                style={{ width: 20, height: 20, marginTop: 1 }}
+              />
+  <Text style={styles.pdftext}>message-{d.firstname} {d.name}</Text>
+
 </View>
+
+  </TouchableHighlight>
+</View>
+
+
 
 
         </View>} 
@@ -124,7 +134,7 @@ const styles = StyleSheet.create({
   itemcontainer:{
     flex:1,
     flexDirection:"row",
-    height:100,
+    height:110,
     margin:1,
     backgroundColor:"#fff",
   },
@@ -145,7 +155,7 @@ const styles = StyleSheet.create({
     padding:10,
     textAlign:"center",
     justifyContent:"center", 
-    marginTop:24,
+    marginTop:8,
   },
   errors:{
     backgroundColor:"#E57373",
@@ -157,7 +167,7 @@ const styles = StyleSheet.create({
     padding:10,
     textAlign:"center",
     justifyContent:"center",
-    marginTop:24,
+    marginTop:8,
     color:"#000"
   },
   pending:{
@@ -170,10 +180,18 @@ const styles = StyleSheet.create({
     padding:10,
     textAlign:"center",
     justifyContent:"center",
-    marginTop:24,
+    marginTop:8,
   },
   pdf:{
       width:20,
+  },
+  pdftext:{
+    fontWeight:"bold",
+    color:"#ddd",
+
+  },
+  pdfcontainer:{
+padding:10,
   },
 
 
