@@ -36,7 +36,7 @@ export default class OverviewListView extends Component {
     };
 
     this._formatDate = function(date) {
-      const d = d.split(".")
+      const d = date.split(".")
       const day = d[0] < 10 ? `0${d[0]}` : d[0]  
       const month = d[1] < 10 ? `0${d[1]}` : d[1]  
       const year = d[2] < 10 ? `0${d[2]}` : d[2]  
