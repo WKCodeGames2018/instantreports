@@ -67,17 +67,17 @@ export default class OverviewListView extends Component {
 
   render() {
     return (
-      <View style={{flex: 0.8}}>
+      <View style={{flex: 1}}>
         
-        <View> 
-      <Button style={{flex:1}}
+        <View  style={styles.send}> 
+      <Button
   onPress={function () {this.props.navigation.navigate('SelectMode')}.bind(this)}  
   title="New immediate notice"
-  color="#841584"
+
   accessibilityLabel="Learn more about this purple button"
 /></View>
 
-<ListView
+<ListView 
         dataSource={this.state.dataSource} 
         renderRow={(d) => <View style={styles.itemcontainer}
         enableEmptySections={true} 
@@ -86,8 +86,8 @@ export default class OverviewListView extends Component {
 <Text style={[d.sended == "pending"?styles.pending:d.sended == "error"?styles.errors:styles.icon]}>{d.icon}</Text>
 <View style={styles.item}>
 <Text style={styles.bold}>{d.firstname} {d.name}</Text> 
-<Text>Created: {d.create}</Text>
-<Text>Sended: {d.sended}</Text>
+<Text>Entry date: {d.create}</Text>
+<Text>Send state: {d.sended}</Text>
 <TouchableHighlight onPress={function () {config.doc=d.doc;this.props.navigation.navigate('PDF')}.bind(this)}>
 <View style={styles.pdfcontainer}>
 <Image
@@ -193,6 +193,9 @@ const styles = StyleSheet.create({
   pdfcontainer:{
 padding:10,
   },
+  send:{
+padding:10, 
 
+  }
 
 });

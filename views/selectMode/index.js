@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AppRegistry, View, Button } from 'react-native';
+import { AppRegistry, View, Button,StyleSheet } from 'react-native';
 
 export default class SelectModeView extends Component {
   constructor(props) {
@@ -8,25 +8,32 @@ export default class SelectModeView extends Component {
 
   render() {
     return (
-      <View>
-        <Button
+      <View style={styles.container}>
+      <View style={styles.send}>
+        <Button style={styles.send}
           onPress={() => this.props.navigation.navigate('QR')}
           title="QR-Code"
-          color="#841584"
           accessibilityLabel="Learn more about this purple button"
         />  
-        <Button
+        </View>
+        <View style={styles.send}>
+        <Button style={styles.send}
           onPress={() => this.props.navigation.navigate('SocialSecurity')}
           title="Social-Security-No. available"
-          color="#841584"
+
           accessibilityLabel="Learn more about this purple button"
         />
-        <Button
+        </View>
+        
+         <View style={styles.send}>
+        <Button style={styles.send}
           onPress={() => this.props.navigation.navigate('NoSocialSecurity')}
           title="Social-Security-No. not available"
-          color="#841584"
+
           accessibilityLabel="Learn more about this purple button"
-        />        
+        />      
+        </View>
+           
     </View>      
     );
   }
@@ -34,3 +41,14 @@ export default class SelectModeView extends Component {
  
 // skip this line if using Create React Native App
 AppRegistry.registerComponent('codegames', () => SelectModeView);
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+  },
+  send:{
+padding:10,
+
+  }
+})

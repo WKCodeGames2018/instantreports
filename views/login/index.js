@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AppRegistry, TextInput, Text, View, Button, Alert } from 'react-native';
+import { AppRegistry, TextInput, Text, View, Button, Alert, StyleSheet,ImageBackground } from 'react-native';
 import tokenHelper from '../../helper/token';
 
 export default class LoginView extends Component {
@@ -42,25 +42,40 @@ export default class LoginView extends Component {
 
   render() {
     return (
-      <View>
+      <View style={styles.container}>
+      <ImageBackground source={require('../../assets/images/back.png')} style={styles.backgroundImage} >
         <TextInput
+        style={styles.field}
+        underlineColorAndroid={'transparent'}
+         
+          autoCapitalize={'none'}
           onChangeText={(orga) => this.setState({orga})}
-          value={this.state.orga}
-        />
+          value={this.state.orga} 
+        /> 
         <TextInput
+         underlineColorAndroid={'transparent'}
+        style={styles.field}
+          autoCapitalize={'none'}        
           onChangeText={(user) => this.setState({user})}
           value={this.state.user}
         />
-        <TextInput
+        <TextInput style={styles.field}
+          autoCapitalize={'none'}
+          underlineColorAndroid={'transparent'} 
           onChangeText={(password) => this.setState({password})}
           value={this.state.password}
+          password = {true}
+          secureTextEntry={true}
         />
-        <Button
-          onPress={this._onPress.bind(this)}
-          title="Log In!"
-          color="#841584"
-          accessibilityLabel="Learn more about this purple button"
-        />        
+        <View style={styles.send}>
+          <Button 
+            onPress={this._onPress.bind(this)}
+            title="Log In!"
+            accessibilityLabel="Learn more about this purple button"
+          />   
+          </View>
+         
+        </ImageBackground>    
     </View>      
     );
   }
@@ -68,3 +83,31 @@ export default class LoginView extends Component {
  
 // skip this line if using Create React Native App
 AppRegistry.registerComponent('codegames', () => LoginView);
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#eee',
+
+  }, 
+  backgroundImage: {
+    flex: 1,
+    width: null,
+    height: null,
+    padding:20,
+    paddingTop:100, 
+  },
+  field:{
+   
+    padding:4,
+    margin:8,
+    backgroundColor:'#fff', 
+    borderRadius: 4,
+    borderWidth: 0.5,
+    borderColor: '#d6d7da',
+  },
+  send:{
+padding:40,
+
+  }
+});
