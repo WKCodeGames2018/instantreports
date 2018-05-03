@@ -10,7 +10,7 @@ export default class SocialSecurity extends Component {
     this.state = {
       surName: "surname",
       firstName: "firstname",
-      entranceDate: "2018-05-01",
+      entranceDate: "2018-05-03",
       socialSecurityNo: config.socialSecurityNo,
       selectedLocation: "",
       baseUrl: "https://ocde-pg.wktaa.de/sdn/rest/api/payroll/firmendatenapicontract",
@@ -21,21 +21,6 @@ export default class SocialSecurity extends Component {
 
     this._register = async function () {
       try {
-        /* const req = new Request(`${this.state.registerUrl}?organization=${config.orgaId}`);
-
-        req.method = 'POST';
-        req.headers = {
-          Accept: 'application/json',
-          'Authorization': this.state.token
-        }
-        req.body = JSON.stringify({
-          vorname: this.state.firstName,
-          nachname: this.state.surName,
-          svnummer: this.state.socialSecurityNo,
-          betriebstaettenummer: this.state.selectedLocation,
-          eintrittsdatum: this.state.entranceDate
-        })
-        let response = await fetch(req); */
         let response = await fetch(`${this.state.registerUrl}?organization=${config.orgaId}`, {
           method: 'POST',
           headers: {
@@ -122,10 +107,11 @@ export default class SocialSecurity extends Component {
             mode="date"
             placeholder="select date"
             format="YYYY-MM-DD"
-            minDate="2018-05-01"
+            minDate="2018-05-03"
             maxDate="2018-07-01"
             confirmBtnText="Confirm"
             cancelBtnText="Cancel"
+            showIcon="false"
             customStyles={{
               dateIcon: {
                 position: 'absolute',
