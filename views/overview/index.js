@@ -4,7 +4,7 @@ import tokenHelper from '../../helper/token';
 import config  from '../../helper/config';
 
 
-class RowData{
+export class RowData{
 
   constructor(firstname,name,create,sended,doc){
     this.name = name;
@@ -14,6 +14,11 @@ class RowData{
     this.icon = firstname[0]+name[0];
     this.doc = doc;
   }
+
+  setState=function(docid,senddate){
+    this.sended = senddate;
+    this.doc = docid;
+  }
 }
 
 export default class OverviewListView extends Component {
@@ -22,7 +27,7 @@ export default class OverviewListView extends Component {
     this.state = { text: 'Useless Placeholder' };
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}); 
     this.messages = [];
-    this.messages.push(new RowData("Tina","Lieber","","error",""));
+    this.messages.push(new RowData("Tina","Lieber","","pending",""));
     this.state = {
       dataSource: ds.cloneWithRows(this.messages),
       baseUrl: "https://ocde-pg.wktaa.de/sdn/rest/api/payroll/instantmessage/",
@@ -30,6 +35,8 @@ export default class OverviewListView extends Component {
         
     
     };
+
+
 
     this._getSofortmeldungen = async function() {
       try {
@@ -63,7 +70,24 @@ export default class OverviewListView extends Component {
     this._getSofortmeldungen();
   }
 
-  
+
+
+  renderItem=function(d){
+    return d.doc?
+    <TouchableHighlight style={{flex:1}} onPress={function () {config.doc=d.doc;this.props.navigation.navigate('PDF')}.bind(this)}>
+    <View style={styles.pdfcontainer}>
+    <Image
+                    source={require('../../assets/images/pdf.png')}
+                    resizeMode="contain"
+                    fadeDuration={0}
+                    style={{ width: 24, height: 24,flex:0.5}}   
+                  />
+      <Text style={styles.pdftext}>message-{d.firstname} {d.name}</Text>
+    
+    </View>
+    
+      </TouchableHighlight>:<Text />;
+  }
 
   render() {
     return (
@@ -88,19 +112,8 @@ export default class OverviewListView extends Component {
 <Text style={styles.bold}>{d.firstname} {d.name}</Text> 
 <Text>Entry date: {d.create}</Text>
 <Text>Send state: {d.sended}</Text>
-<TouchableHighlight style={{flex:1}} onPress={function () {config.doc=d.doc;this.props.navigation.navigate('PDF')}.bind(this)}>
-<View style={styles.pdfcontainer}>
-<Image
-                source={require('../../assets/images/pdf.png')}
-                resizeMode="contain"
-                fadeDuration={0}
-                style={{ width: 24, height: 24,flex:0.5}}   
-              />
-  <Text style={styles.pdftext}>message-{d.firstname} {d.name}</Text>
+  {this.renderItem(d)} 
 
-</View>
-
-  </TouchableHighlight>
 </View> 
 
 
