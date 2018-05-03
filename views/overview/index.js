@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { AppRegistry, TextInput, View, ListView, Text,StyleSheet,Button,Alert,TouchableHighlight,Image} from 'react-native';
 import tokenHelper from '../../helper/token';
+import cache from '../../helper/cache';
 import config  from '../../helper/config';
 
 
-export class RowData{
+class RowData{
 
   constructor(firstname,name,create,sended,doc){
     this.name = name;
@@ -15,7 +16,7 @@ export class RowData{
     this.doc = doc;
   }
 
-  setState=function(docid,senddate){
+  setState = function (docid,senddate) {
     this.sended = senddate;
     this.doc = docid;
   }
@@ -52,7 +53,7 @@ export default class OverviewListView extends Component {
 
         if (response.status == 200) { 
 
-          responseJson.data.map(x=>this.messages.push(new RowData(x.vorname,x.nachname,x.eintrittsdatum,x.sendedatum,x.fileName)));
+          responseJson.data.map(x=>this.messages.push(new RowData(x.vorname,x.nachname,x.eintrittsdatum,x.sendedatum,x.fileName)));          
 
         } else {
           Alert.alert("Oo smth. went wrong, response code " + response.status);
@@ -60,6 +61,12 @@ export default class OverviewListView extends Component {
       } catch (e) {
         Alert.alert(e.message);
       
+      }
+      finally {
+        if (cache.length) {
+          const worker = cache.getItem("instantreport");
+          this.messages.push(new RowData(worker.vorname,worker.nachname,worker.eintrittsdatum,"pending", ""))
+        }
       }
       this.setState({
         dataSource: this.state.dataSource.cloneWithRows(this.messages)
