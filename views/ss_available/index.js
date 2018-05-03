@@ -39,8 +39,7 @@ export default class SocialSecurity extends Component {
         })
         let responseJson = await response.json();
 
-        if (response.status == 201) {
-          this.props.navigation.navigate('List');
+        if (response.status == 201) {          
           cache.addItem("instantreport", {
             vorname: this.state.firstName,
             nachname: this.state.surName,
@@ -48,6 +47,7 @@ export default class SocialSecurity extends Component {
             betriebstaettenummer: this.state.selectedLocation.betriebsnummer,
             eintrittsdatum: this.state.entranceDate
           })
+          this.props.navigation.navigate('List');
         } else {
           Alert.alert("Oo smth. went wrong, pls check your inputs");
         }
