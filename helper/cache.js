@@ -18,7 +18,7 @@ class Cache {
     return val;
   }
 
-  length() {
+  get length() {
     return this._storage.size
   }
 }
