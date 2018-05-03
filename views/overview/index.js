@@ -28,18 +28,18 @@ export default class OverviewListView extends Component {
     this.state = { text: 'Useless Placeholder' };
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}); 
     this.messages = [];
-    this.messages.push(new RowData("Tina","Lieber","","pending",""));
+ 
     this.state = {
       dataSource: ds.cloneWithRows(this.messages),
       baseUrl: "https://ocde-pg.wktaa.de/sdn/rest/api/payroll/instantmessage/",
       token: `Bearer ${tokenHelper.token}`
         
-    
+     
     };
 
 
 
-    this._getSofortmeldungen = async function() {
+    this._getSofortmeldungen = async function() { 
       try {
         const req = new Request(`${this.state.baseUrl}?organization=${config.orgaId}`);
 
@@ -96,22 +96,10 @@ export default class OverviewListView extends Component {
       </TouchableHighlight>:<Text />;
   }
 
-  render() {
-    return (
-      <View style={{flex: 1}}>
-        
-        <View  style={styles.send}>  
-      <Button
-  onPress={function () {this.props.navigation.navigate('SelectMode')}.bind(this)}  
-  title="New immediate notice"
-
-  accessibilityLabel="Learn more about this purple button"
-/></View>
- 
-<ListView 
+  renderAll=function(messages){
+return messages.length>0?<ListView 
         dataSource={this.state.dataSource} 
         renderRow={(d) => <View style={styles.itemcontainer}
-        enableEmptySections={true} 
         >
 
 <Text style={[d.sended == "pending"?styles.pending:d.sended == "error"?styles.errors:styles.icon]}>{d.icon}</Text>
@@ -130,7 +118,22 @@ export default class OverviewListView extends Component {
  
 
       >
-</ListView>
+</ListView>:<Text />;
+  }
+
+  render() {
+    return (
+      <View style={{flex: 1}}>
+        
+        <View  style={styles.send}>  
+      <Button
+  onPress={function () {this.props.navigation.navigate('SelectMode')}.bind(this)}  
+  title="New immediate notice"
+
+  accessibilityLabel="Learn more about this purple button"
+/></View>
+ 
+{this.renderAll(this.messages)}
 
 
     </View>
@@ -206,8 +209,8 @@ const styles = StyleSheet.create({
       width:20,
   },
   pdftext:{
-    fontWeight:"bold",
-    color:"#ddd",
+    fontWeight:"bold", 
+    color:"#ccc",
     flex:4,
     
   },
