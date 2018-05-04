@@ -32,7 +32,7 @@ export default class OverviewListView extends Component {
       dataSource: ds.cloneWithRows(this.state.messages),
       baseUrl: "https://ocde-pg.wktaa.de/sdn/rest/api/payroll/instantmessage/",
       token: `Bearer ${tokenHelper.token}`,
-      messages = []
+      messages: []
     };
 
     this._formatDate = function(date) {
