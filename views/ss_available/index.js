@@ -6,6 +6,80 @@ import tokenHelper from '../../helper/token';
 import cache from '../../helper/cache';
 import IOSPicker from 'react-native-ios-picker';
 
+class FormPicker extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      modalVisible: false,
+    };
+  }
+
+  render() {
+    if (Platform.OS === 'android') {
+      return (
+        <Picker
+          selectedValue={this.props.value}
+          onValueChange={this.props.onValueChange}>
+          {this.props.items.map((i, index) => (
+            <Picker.Item key={index} label={i.label} value={i.value} />
+          ))}
+        </Picker>
+      );
+    } else {
+      const selectedItem = this.props.items.find(
+        i => i.betriebsnummer === this.props.betriebsnummer
+      );
+      const selectedLabel = selectedItem ? selectedItem.name : '';
+      return (
+        <View style={styles.inputContainer}>
+          <TouchableOpacity
+            onPress={() => this.setState({ modalVisible: true })}>
+            <TextInput
+              style={styles.input}
+              editable={false}
+              placeholder="Select language"
+              onChangeText={searchString => {
+                this.setState({ searchString });
+              }}
+              value={selectedLabel}
+            />
+          </TouchableOpacity>
+          <Modal
+            animationType="slide"
+            transparent={true}
+            visible={this.state.modalVisible}>
+            <TouchableWithoutFeedback
+              onPress={() => this.setState({ modalVisible: false })}>
+              <View style={styles.modalContainer}>
+                <View style={styles.buttonContainer}>
+                  <Text
+                    style={{ color: 'blue' }}
+                    onPress={() => this.setState({ modalVisible: false })}>
+                    Done
+                  </Text>
+                </View>
+                <View>
+                  <Picker
+                    selectedValue={this.props.value}
+                    onValueChange={this.props.onValueChange}>
+                    {this.props.items.map((i, index) => (
+                      <Picker.Item
+                        key={index}
+                        label={i.name}
+                        value={i.betriebsnummer}
+                      />
+                    ))}
+                  </Picker>
+                </View>
+              </View>
+            </TouchableWithoutFeedback>
+          </Modal>
+        </View>
+      );
+    }
+  }
+}
+
 export default class SocialSecurity extends Component {
   constructor(props) {
     super(props);
@@ -151,46 +225,11 @@ export default class SocialSecurity extends Component {
         : null} 
         {this.state.locations && this.state.locations.length > 0 && Platform.OS === 'ios' ? 
         <View>
-          <TouchableOpacity
-          onPress={() => this.setState({ modalVisible: true })}>
-            <TextInput
-              style={styles.input}
-              editable={false}
-              placeholder="Select language"
-              onChangeText={searchString => {
-                this.setState({ searchString });
-              }}
-              value={this.state.selectedLocation.name}
-            />
-          </TouchableOpacity>
-          <Modal
-            animationType="slide"
-            transparent={true}
-            visible={this.state.modalVisible}>
-            <TouchableWithoutFeedback
-              onPress={() => this.setState({ modalVisible: false })}>
-              <View style={styles.modalContainer}>
-                <View style={styles.buttonContainer}>
-                  <Text
-                    style={{ color: 'blue' }}
-                    onPress={() => this.setState({ modalVisible: false })}>
-                    Done
-                  </Text>
-                </View>
-                <View>
-                  <Picker
-                    selectedValue={this.state.selectedLocation}
-                    onValueChange={(item, itemIndex) => this.setState({selectedLocation: item})}>
-                    {this.state.locations.map((item, key) => {
-                      return (
-                        <Picker.Item label={item.name} key={key} value={item.betriebsnummer} />
-                      );
-                    })}
-                  </Picker>
-                </View>
-              </View>
-            </TouchableWithoutFeedback>
-          </Modal>
+          <FormPicker
+          items={this.state.locations}
+          value={this.state.selectedLocation}
+          onValueChange={itemValue => this.setState({ selectedLocation: itemValue })}
+          />
           /* <IOSPicker mode='modal'
             selectedValue={this.state.selectedLocation}
             onValueChange={(item, itemIndex) => this.setState({selectedLocation: item})}
