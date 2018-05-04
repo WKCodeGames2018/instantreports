@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AppRegistry, View, Button, TextInput, Picker, Input, Alert,StyleSheet } from 'react-native';
+import { AppRegistry, View, Button, TextInput, Picker, PickerIOS, Platform, Input, Alert,StyleSheet } from 'react-native';
 import DatePicker from 'react-native-datepicker'
 import config  from '../../helper/config';
 import tokenHelper from '../../helper/token';
@@ -108,41 +108,37 @@ export default class SocialSecurity extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <View>
-       
-       <DatePicker 
-          style={styles.picker}
-         date={this.state.entranceDate}
-         mode="date"
-         placeholder="select date"
-         format="YYYY-MM-DD"
-         minDate="2018-05-03"
-         maxDate="2018-07-01"
-         confirmBtnText="Confirm"  
-         cancelBtnText="Cancel"
-         showIcon={true}
-         customStyles={{
-           dateIcon: {
-             position: 'absolute',
-             left: 0,
-             top: 4,
-             marginLeft: 0
-           },
-           dateInput: {
-             marginLeft: 36
-           }
-           // ... You can check the source to find the other keys.
-         }}
-         onDateChange={(date) => {this.setState({entranceDate: date})}}
-       />
-
-     
+        <View>       
+          <DatePicker 
+            style={styles.picker}
+            date={this.state.entranceDate}
+            mode="date"
+            placeholder="select date"
+            format="YYYY-MM-DD"
+            minDate="2018-05-03"
+            maxDate="2018-07-01"
+            confirmBtnText="Confirm"  
+            cancelBtnText="Cancel"
+            showIcon={true}
+            customStyles={{
+            dateIcon: {
+              position: 'absolute',
+              left: 0,
+              top: 4,
+              marginLeft: 0
+            },
+            dateInput: {
+              marginLeft: 36
+            }
+            // ... You can check the source to find the other keys.
+          }}
+          onDateChange={(date) => {this.setState({entranceDate: date})}}
+          />     
        </View>
-       {this.state.locations && this.state.locations.length > 0 ? 
-        <View style={{height: 50}}>
+       {this.state.locations && this.state.locations.length > 0 && Platform !== 'ios' ? 
+        <View>
           <Picker
             selectedValue={this.state.selectedLocation}
-            style={{flex: 1}}
             onValueChange={(item, itemIndex) => this.setState({selectedLocation: item})}>
             {this.state.locations.map((item, key) => {
               return (
@@ -152,6 +148,19 @@ export default class SocialSecurity extends Component {
           </Picker>
         </View>
         : null} 
+        {this.state.locations && this.state.locations.length > 0 && Platform === 'ios' ? 
+        <View>
+          <PickerIOS
+            selectedValue={this.state.selectedLocation}
+            onValueChange={(item, itemIndex) => this.setState({selectedLocation: item})}>
+            {this.state.locations.map((item, key) => {
+              return (
+                <PickerIOS.Item label={item.name} key={key} value={item.betriebsnummer} />
+              );
+            })}
+          </PickerIOS>
+        </View>
+        : null}
         <TextInput style={styles.field}
           onChangeText={(socialSecurityNo) => this.setState({socialSecurityNo})}
           value={this.state.socialSecurityNo}
