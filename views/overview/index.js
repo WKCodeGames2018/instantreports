@@ -93,11 +93,12 @@ export default class OverviewListView extends Component {
           messages: prepMessages
         })
         this.forceUpdate()
-      }
-      
-    
-    }
+        Alert.alert("fetched messages")
+      }   
+    }    
+  }
 
+  componentDidMount() {
     this._getSofortmeldungen();
     if (!this.state.pollIntervall) {
       this.state.pollIntervall = setInterval( () => {
@@ -110,9 +111,41 @@ export default class OverviewListView extends Component {
     clearInterval(this.state.pollIntervall)
   }
 
+  render() {
+    return (
+      <ListView
+        style={styles.container}
+        dataSource={this.state.dataSource}
+        renderRow={
+          (d) => <View style={styles.itemcontainer}>
+            <Text style={[d.sended == "pending"?styles.pending:d.sended == "error"?styles.errors:styles.icon]}>{d.icon}</Text>
+            <View style={styles.item}>
+              <Text style={styles.bold}>{d.firstname} {d.name}</Text> 
+              <Text style={styles.pdfsub}>Entry date: {d.create}</Text>
+              <Text style={styles.pdfsub}>Send state: {d.sended}</Text>
+              {d.doc ? 
+                <TouchableHighlight style={{flex:1}} onPress={function () {config.doc=d.doc;this.props.navigation.navigate('PDF')}.bind(this)}>
+                  <View style={styles.pdfcontainer}>
+                    <Image
+                      source={require('../../assets/images/pdf.png')}
+                      resizeMode="contain"
+                      fadeDuration={0}
+                      style={{ width: 24, height: 24,flex:0.5}}   
+                    />
+                    <Text style={styles.pdftext}>message-{d.firstname} {d.name}</Text>    
+                  </View>    
+                </TouchableHighlight>
+              : null
+              }
+            </View> 
+          </View>
+        }
+      />
+    );
+  }
 
 
-  renderItem=function(d){
+  /* renderItem=function(d){
     return d.doc?
     <TouchableHighlight style={{flex:1}} onPress={function () {config.doc=d.doc;this.props.navigation.navigate('PDF')}.bind(this)}>
     <View style={styles.pdfcontainer}>
@@ -174,7 +207,7 @@ return messages.length>0?<ListView
         // {this.renderAll(this.state.messages)}
       </View>
     );
-  } 
+  }  */
 
 
 
