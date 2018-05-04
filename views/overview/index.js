@@ -167,7 +167,7 @@ return messages.length>0?<ListView
           this.renderAll(this.state.messages)
         : null
         }
-        {this.state.messages || !this.state.messages.length ? 
+        {!this.state.messages || !this.state.messages.length ? 
           <Text style={styles.bold}>No Messages or still fetching...</Text>
         : null
         }
