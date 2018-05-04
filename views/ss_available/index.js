@@ -160,7 +160,7 @@ export default class SocialSecurity extends Component {
               onChangeText={searchString => {
                 this.setState({ searchString });
               }}
-              value={this.state.selectedLocation}
+              value={this.state.selectedLocation.name}
             />
           </TouchableOpacity>
           <Modal
