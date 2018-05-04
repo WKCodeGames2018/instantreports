@@ -86,13 +86,14 @@ export default class OverviewListView extends Component {
           })                
         }
         //this.messages = prepMessages       
-        const old = this.state.dataSource._dataBlob.s1;
+        
         this.setState({
           dataSource: this.state.dataSource.cloneWithRows([])
         })
-        const new = 
+        const old = this.state.dataSource._dataBlob.s1;
+        const newDs = old.concat(prepMessages);
         this.setState({
-          dataSource: this.state.dataSource.cloneWithRows(prepMessages)
+          dataSource: this.state.dataSource.cloneWithRows(newDs)
         })
         this.setState({
           messages: prepMessages
