@@ -29,7 +29,7 @@ export default class OverviewListView extends Component {
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}); 
  
     this.state = {
-      dataSource: ds.cloneWithRows(this.state.messages),
+      dataSource: ds.cloneWithRows([]),
       baseUrl: "https://ocde-pg.wktaa.de/sdn/rest/api/payroll/instantmessage/",
       token: `Bearer ${tokenHelper.token}`,
       messages: []
@@ -156,20 +156,23 @@ return messages.length>0?<ListView
 
   render() {
     return (
-      <View style={{flex: 1}}>
-        
+      <View style={{flex: 1}}>        
         <View  style={styles.send}>  
-      <Button
-  onPress={function () {this.props.navigation.navigate('SelectMode')}.bind(this)}  
-  title="New immediate notice"
-
-  accessibilityLabel="Learn more about this purple button"
-/></View>
- 
-{this.renderAll(this.state.messages)}
-
-
-    </View>
+          <Button
+            onPress={function () {this.props.navigation.navigate('SelectMode')}.bind(this)}  
+            title="New immediate notice"
+            accessibilityLabel="Learn more about this purple button"/>
+        </View>
+        {this.state.messages && this.state.messages.length ? 
+          this.renderAll(this.state.messages)
+        : null
+        }
+        {this.state.messages || !this.state.messages.length ? 
+          <Text style={styles.bold}>No Messages or still fetching...</Text>
+        : null
+        }
+        // {this.renderAll(this.state.messages)}
+      </View>
     );
   } 
 
