@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AppRegistry, View, Button, TextInput, Picker, PickerIOS, Platform, Input, Alert,StyleSheet, TouchableWithoutFeedback, TouchableOpacity, Modal  } from 'react-native';
+import { AppRegistry, View, Button, Text, TextInput, Picker, PickerIOS, Platform, Input, Alert,StyleSheet, TouchableWithoutFeedback, TouchableOpacity, Modal  } from 'react-native';
 import DatePicker from 'react-native-datepicker'
 import config  from '../../helper/config';
 import tokenHelper from '../../helper/token';
