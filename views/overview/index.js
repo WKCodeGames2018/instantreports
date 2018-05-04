@@ -27,12 +27,12 @@ export default class OverviewListView extends Component {
     super(props);
     this.state = { text: 'Useless Placeholder' };
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}); 
-    this.messages = [];
  
     this.state = {
-      dataSource: ds.cloneWithRows(this.messages),
+      dataSource: ds.cloneWithRows(this.state.messages),
       baseUrl: "https://ocde-pg.wktaa.de/sdn/rest/api/payroll/instantmessage/",
-      token: `Bearer ${tokenHelper.token}`
+      token: `Bearer ${tokenHelper.token}`,
+      messages = []
     };
 
     this._formatDate = function(date) {
@@ -85,9 +85,12 @@ export default class OverviewListView extends Component {
             prepMessages.push(new RowData(worker.vorname,worker.nachname,worker.eintrittsdatum,"pending", ""))            
           })                
         }
-        this.messages = prepMessages
+        //this.messages = prepMessages
         this.setState({
-          dataSource: this.state.dataSource.cloneWithRows(this.messages)
+          messages: prepMessages
+        })
+        this.setState({
+          dataSource: this.state.dataSource.cloneWithRows(this.state.messages)
         })
         this.forceUpdate()
       }
@@ -163,7 +166,7 @@ return messages.length>0?<ListView
   accessibilityLabel="Learn more about this purple button"
 /></View>
  
-{this.renderAll(this.messages)}
+{this.renderAll(this.state.messages)}
 
 
     </View>
