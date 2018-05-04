@@ -44,7 +44,7 @@ export default class OverviewListView extends Component {
     }
 
     this._getSofortmeldungen = async function() {
-      const prepMessages = []
+      let prepMessages = []
       let resWorkers = []
 
       try {        
