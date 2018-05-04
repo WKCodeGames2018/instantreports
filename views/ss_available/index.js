@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AppRegistry, View, Button, TextInput, Picker, PickerIOS, Platform, Input, Alert,StyleSheet } from 'react-native';
+import { AppRegistry, View, Button, TextInput, Picker, PickerIOS, Platform, Input, Alert,StyleSheet, TouchableWithoutFeedback, TouchableOpacity, Modal  } from 'react-native';
 import DatePicker from 'react-native-datepicker'
 import config  from '../../helper/config';
 import tokenHelper from '../../helper/token';
@@ -18,7 +18,8 @@ export default class SocialSecurity extends Component {
       baseUrl: "https://ocde-pg.wktaa.de/sdn/rest/api/payroll/firmendatenapicontract",
       registerUrl: "https://ocde-pg.wktaa.de/sdn/rest/api/payroll/instantmessage",
       locations: [],
-      token: `Bearer ${tokenHelper.token}`
+      token: `Bearer ${tokenHelper.token}`,
+      modalVisible: false
     }
 
     if(config.scanfield1!=""){
@@ -40,8 +41,7 @@ export default class SocialSecurity extends Component {
   }else {
       this.state.socialSecurityNo ="";
       this.state.surName = "";
-      this.state.firstName = "";
-      
+      this.state.firstName = "";      
   }
 
     this._register = async function () {
@@ -151,7 +151,47 @@ export default class SocialSecurity extends Component {
         : null} 
         {this.state.locations && this.state.locations.length > 0 && Platform === 'ios' ? 
         <View>
-          <IOSPicker mode='modal'
+          <TouchableOpacity
+          onPress={() => this.setState({ modalVisible: true })}>
+            <TextInput
+              style={styles.input}
+              editable={false}
+              placeholder="Select language"
+              onChangeText={searchString => {
+                this.setState({ searchString });
+              }}
+              value={selectedLabel}
+            />
+          </TouchableOpacity>
+          <Modal
+            animationType="slide"
+            transparent={true}
+            visible={this.state.modalVisible}>
+            <TouchableWithoutFeedback
+              onPress={() => this.setState({ modalVisible: false })}>
+              <View style={styles.modalContainer}>
+                <View style={styles.buttonContainer}>
+                  <Text
+                    style={{ color: 'blue' }}
+                    onPress={() => this.setState({ modalVisible: false })}>
+                    Done
+                  </Text>
+                </View>
+                <View>
+                  <Picker
+                    selectedValue={this.state.selectedLocation}
+                    onValueChange={(item, itemIndex) => this.setState({selectedLocation: item})}>
+                    {this.state.locations.map((item, key) => {
+                      return (
+                        <Picker.Item label={item.name} key={key} value={item.betriebsnummer} />
+                      );
+                    })}
+                  </Picker>
+                </View>
+              </View>
+            </TouchableWithoutFeedback>
+          </Modal>
+          /* <IOSPicker mode='modal'
             selectedValue={this.state.selectedLocation}
             onValueChange={(item, itemIndex) => this.setState({selectedLocation: item})}
             collapseViewStyle={{backgroundColor:'white'}}>
@@ -160,7 +200,7 @@ export default class SocialSecurity extends Component {
                 <Picker.Item label={item.name} key={key} value={item.betriebsnummer} />
               )
             }
-          </IOSPicker>
+          </IOSPicker> */
           /* <PickerIOS
             selectedValue={this.state.selectedLocation}
             onValueChange={(item, itemIndex) => this.setState({selectedLocation: item})}>
@@ -205,6 +245,34 @@ export default class SocialSecurity extends Component {
 AppRegistry.registerComponent('codegames', () => SocialSecurity);
 
 const styles = StyleSheet.create({
+  inputContainer: {
+    ...Platform.select({
+      ios: {
+        borderBottomColor: 'gray',
+        borderBottomWidth: 1,
+      },
+    }),
+  },
+  input: {
+    height: 40,
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'flex-end',
+  },
+  buttonContainer: {
+    justifyContent: 'flex-end',
+    flexDirection: 'row',
+    padding: 4,
+    backgroundColor: '#ececec',
+  },
+  content: {
+    marginLeft: 15,
+    marginRight: 15,
+    marginBottom: 5,
+    alignSelf: 'stretch',
+    justifyContent: 'center',
+  },
   container: {
     flex: 1,
     backgroundColor: '#eee',
