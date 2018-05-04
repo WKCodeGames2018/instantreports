@@ -93,19 +93,25 @@ export default class OverviewListView extends Component {
           messages: prepMessages
         })
         this.forceUpdate()
-        Alert.alert("fetched messages")
-      }   
+      }
+      
+      this._getSofortmeldungen();
+      if (!this.state.pollIntervall) {
+        this.state.pollIntervall = setInterval( () => {
+          this._getSofortmeldungen();
+        }, 5000)
+      }  
     }    
   }
 
-  componentDidMount() {
+  /* componentDidMount() {
     this._getSofortmeldungen();
     if (!this.state.pollIntervall) {
       this.state.pollIntervall = setInterval( () => {
         this._getSofortmeldungen();
       }, 5000)
     }    
-  }
+  } */
 
   componentWillUnmount() {
     clearInterval(this.state.pollIntervall)
