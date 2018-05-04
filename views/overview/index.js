@@ -85,12 +85,12 @@ export default class OverviewListView extends Component {
             prepMessages.push(new RowData(worker.vorname,worker.nachname,worker.eintrittsdatum,"pending", ""))            
           })                
         }
-        //this.messages = prepMessages
+        //this.messages = prepMessages        
         this.setState({
-          messages: prepMessages
+          dataSource: this.state.dataSource.cloneWithRows(prepMessages)
         })
         this.setState({
-          dataSource: this.state.dataSource.cloneWithRows(this.state.messages)
+          messages: prepMessages
         })
         this.forceUpdate()
       }
