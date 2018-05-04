@@ -92,7 +92,7 @@ export default class OverviewListView extends Component {
         this.setState({
           messages: prepMessages
         })
-        this.forceUpdate()
+        // this.forceUpdate()
       }
       
       this._getSofortmeldungen();
