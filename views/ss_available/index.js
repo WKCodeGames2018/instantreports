@@ -136,7 +136,7 @@ export default class SocialSecurity extends Component {
           onDateChange={(date) => {this.setState({entranceDate: date})}}
           />     
        </View>
-       {this.state.locations && this.state.locations.length > 0 && Platform !== 'ios' ? 
+       {this.state.locations && this.state.locations.length > 0 && Platform.OS !== 'ios' ? 
         <View>
           <Picker
             selectedValue={this.state.selectedLocation}
@@ -149,7 +149,7 @@ export default class SocialSecurity extends Component {
           </Picker>
         </View>
         : null} 
-        {this.state.locations && this.state.locations.length > 0 && Platform === 'ios' ? 
+        {this.state.locations && this.state.locations.length > 0 && Platform.OS === 'ios' ? 
         <View>
           <TouchableOpacity
           onPress={() => this.setState({ modalVisible: true })}>

@@ -81,11 +81,16 @@ export default class OverviewListView extends Component {
             })
           })
           const workers = cache.getItems();
-          workers.map(worker => {
-            prepMessages.push(new RowData(worker.vorname,worker.nachname,worker.eintrittsdatum,"pending", ""))            
+          prepMessages = workers.map(worker => {
+            new RowData(worker.vorname,worker.nachname,worker.eintrittsdatum,"pending", "")          
           })                
         }
-        //this.messages = prepMessages        
+        //this.messages = prepMessages       
+        const old = this.state.dataSource._dataBlob.s1;
+        this.setState({
+          dataSource: this.state.dataSource.cloneWithRows([])
+        })
+        const new = 
         this.setState({
           dataSource: this.state.dataSource.cloneWithRows(prepMessages)
         })
