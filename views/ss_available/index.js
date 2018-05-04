@@ -4,6 +4,7 @@ import DatePicker from 'react-native-datepicker'
 import config  from '../../helper/config';
 import tokenHelper from '../../helper/token';
 import cache from '../../helper/cache';
+import IOSPicker from 'react-native-ios-picker';
 
 export default class SocialSecurity extends Component {
   constructor(props) {
@@ -150,7 +151,17 @@ export default class SocialSecurity extends Component {
         : null} 
         {this.state.locations && this.state.locations.length > 0 && Platform === 'ios' ? 
         <View>
-          <PickerIOS
+          <IOSPicker mode='modal'
+            selectedValue={this.state.selectedLocation}
+            onValueChange={(item, itemIndex) => this.setState({selectedLocation: item})}
+            collapseViewStyle={{backgroundColor:'white'}}>
+            { 
+              this.state.locations.map((item, key) =>
+                <Picker.Item label={item.name} key={key} value={item.betriebsnummer} />
+              )
+            }
+          </IOSPicker>
+          /* <PickerIOS
             selectedValue={this.state.selectedLocation}
             onValueChange={(item, itemIndex) => this.setState({selectedLocation: item})}>
             {this.state.locations.map((item, key) => {
@@ -158,7 +169,7 @@ export default class SocialSecurity extends Component {
                 <PickerIOS.Item label={item.name} key={key} value={item.betriebsnummer} />
               );
             })}
-          </PickerIOS>
+          </PickerIOS> */
         </View>
         : null}
         <TextInput style={styles.field}
